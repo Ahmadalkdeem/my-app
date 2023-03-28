@@ -1,57 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { useEffect } from 'react';
 import './App.css';
-
+import MyNavbar from './components/Navbar2/Navbar/Navbar';
+import { Route, Routes } from 'react-router-dom';
+import MyCard from './components/card/Card';
+import Reactselect from './components/Reactselect/Reactselect';
+import Uplodefile from './components/Uplodefile/Uplodefile';
+import Editcard from './components/Edidcard/Editcard';
+import Mycart from './components/mycart/Mycart';
+import Cardlist from './components/cards/Cardlist';
+import Cardlist2 from './components/cardlist2/Cardlist';
+import Page from './components/pagecard/Page';
+import Editpage from './components/Editpage/Editpage ';
+import Bootstrapform from './components/logandsinin/Bootstrapform';
+import Shose from './components/shoselist/Shose';
+import Pants from './components/pantslist/Pants';
+import Shirt from './components/Shirtslist/shirts';
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import { fetchUsers } from './features/cards/cardshirts';
+import { fetchUsers2 } from './features/cards/cardPants';
+import { fetchUsers3 } from './features/cards/cardshose';
+import About from './components/about/About';
 function App() {
+  let Dispatch = useAppDispatch()
+  useEffect(() => {
+    Dispatch(fetchUsers())
+    Dispatch(fetchUsers2())
+    Dispatch(fetchUsers3())
+    // getData();
+
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <>
+      <MyNavbar />
+
+      <Routes >
+        <Route path='/' element={<Cardlist />} />
+        <Route path='/home' element={<Cardlist />} />
+        <Route path='/connection' element={<Bootstrapform />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/Mycard' element={<Mycart />} />
+        <Route path='/shoes' element={<Shose />} />
+        <Route path='/Shirts' element={<Shirt />} />
+        <Route path='/pants' element={<Pants />} />
+        <Route path='/:fcatgre/:scatgre/:id' element={<Page />} />
+        <Route path='/addproduct' element={<Editpage />} />
+      </Routes>
+    </>
   );
 }
 

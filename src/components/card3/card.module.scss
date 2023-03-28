@@ -1,0 +1,111 @@
+.MyCard {
+    width: 100%;
+    max-width: 300px;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    padding: 7px 8px 0px 8px;
+    border-radius: 0px !important;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.myediticon {
+    margin-bottom: -32px;
+    padding: 0 4px;
+    z-index: 1;
+}
+
+.Icons {
+    background-color: white;
+    border-radius: 8px;
+    color: #000;
+}
+
+.MyImg {
+    width: 100%;
+    height: 200px;
+    object-fit: fill;
+    overflow: hidden !important;
+    transition: all ease-in-out 0.4s;
+}
+
+.MyImg:hover {
+    transform: scale(1.08);
+}
+
+.rtrr:hover .sizess {
+    display: flex;
+    justify-content: start;
+}
+
+.mycorsla {
+    width: 100%;
+    height: 200px;
+    transition: all ease-in-out 0.7s;
+}
+
+.mycorsla:hover {
+    opacity: 0.95;
+}
+
+.Myp {
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Almarai', sans-serif;
+}
+
+.mybtn {
+    height: 40px;
+    width: 150px;
+    font-size: 18px;
+    border-radius: 3px;
+    border: 2px solid black;
+    transition: all ease-in-out 0.2s;
+}
+
+.mybtn:hover {
+    color: white;
+    background-color: #000;
+}
+
+.bodycard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Mytitel {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 !important;
+    font-family: 'Noto Sans Hebrew', sans-serif;
+}
+
+@media only screen and (max-width: 450px) {
+    .mybtn {
+        width: 100%;
+        max-width: 300px;
+        max-height: 200px;
+        height: auto;
+    }
+
+    .mycorsla {
+        height: auto;
+
+    }
+
+    .MyCard {
+        padding: 6px;
+    }
+
+    .MyImg {
+        height: 160px;
+
+    }
+
+}
