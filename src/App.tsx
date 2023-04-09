@@ -29,16 +29,11 @@ function App() {
     Dispatch(fetchUsers())
     Dispatch(fetchUsers2())
     Dispatch(fetchUsers3())
-    // getData();
 
   }, []);
   return (
     <>
       <MyNavbar />
-      {/* <br />
-      <br />
-      <br />
-      <Navbarr /> */}
       <Routes >
         <Route path='/' element={<Cardlist />} />
         <Route path='/home' element={<Cardlist />} />
@@ -51,10 +46,10 @@ function App() {
         <Route path='/shoes' element={<Shose />} />
         <Route path='/Shirts' element={<Shirt />} />
         <Route path='/pants' element={<Pants />} />
+        <Route path='/:fcategory/:scategory/:id' element={<Page />} />
         <Route path='/orders' element={<Order />}>
           <Route path='detales/:id' element={<Orderdetales />} />
         </Route>
-        <Route path='/:fcategory/:scategory/:id' element={<Page />} />
         <Route path='/addproduct' element={<Editpage />} />
         <Route path='/Editeproduct/:category/:id' element={<Editeproduct />} />
       </Routes>
