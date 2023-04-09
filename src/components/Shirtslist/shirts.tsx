@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
 import css from './css.module.scss'
+import Select from 'react-select'
 import axios from 'axios'
 import Cardlist from '../cardlist2/Cardlist';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { addItem } from '../../features/cards/cardshirts';
-// import { fetchUsers } from '../../features/cards/cardshirts';
+import { Cardtype } from '../../@types/Mytypes';
+import { stylelableOption } from '../../arrays/list'
+const SizeOptions: any = [];
+const SizeOptions2: any = [];
 function Shose() {
     const [end, setend] = useState<any>(true);
     const { loading, users, error } = useAppSelector((s) => s.cardshirts);
-    // setarr(users)
-    console.log(users);
-    let x = users.length
+
     let Dispatch = useAppDispatch()
     const getData = async () => {
         axios.get(`http://localhost:3001/uplode/Shirtsproduct/1/${users.length}`, {
@@ -37,7 +39,7 @@ function Shose() {
                 if (end === true) {
                     console.log('aaa');
 
-                    getData()
+                    // getData()
                 }
 
 
@@ -54,6 +56,7 @@ function Shose() {
     return (
         <>
             <Cardlist h1='חולצות גבריים' users={users} />
+
             <button onClick={() => {
                 if (end === true) {
                     console.log('aaa');

@@ -1,30 +1,42 @@
-.MyDiv {
+.Container {
+    max-width: 1500px;
+}
+
+.h2 {
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    padding: 0px 10px;
+    letter-spacing: 4px;
+}
+
+.Div {
+    max-width: 1500px;
+    margin: 0 auto;
+    justify-content: center;
     display: grid;
-    grid-template-columns: repeat(5, minmax(100px, 250px));
-    // grid-template-rows: repeat(auto-fit, minmax(100px, 400px));
-    // display: flex;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 10px;
-    padding: 10px 30px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    padding: 10px;
 }
 
-.myyheder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.divlink {
     height: 400px;
-    width: 100%;
-    background-image: url('./blouse-2597205_1280\ \(2\).jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
+    overflow: hidden;
 }
 
-.Myhh1 {
+.Img {
+    width: 100%;
+    height: 400px;
+    z-index: -2;
+    transition: all ease-in-out 0.3s;
+}
+
+.Img:hover {
+    scale: 1.1;
+}
+
+.btn {
     width: 90%;
     font-family: 'Noto Sans Hebrew', sans-serif;
     text-align: center;
@@ -33,89 +45,33 @@
     color: white;
 }
 
-.Myhh2 {
-    text-align: center;
-    margin-top: 10px;
-    font-family: 'Noto Sans Hebrew', sans-serif;
-    padding: 0px 10px;
-    letter-spacing: 4px;
+.btn {
+    position: relative;
+    top: -220px;
+    margin: 0 auto !important;
+    width: 150px;
+    height: 50px;
+    border: none;
+    font-size: 22px;
+    transition: all ease-in-out 0.3s;
+    color: black;
 }
 
-.mmypp {
-    width: 90%;
-    text-align: center;
-    letter-spacing: 1.5px;
-    color: white;
-    font-family: 'Noto Sans Hebrew', sans-serif;
+.btn:hover {
+    background-color: yellow;
 }
 
-.Myheder {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.loo {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // flex-wrap: wrap;
-    // width: 95%;
-    justify-content: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    // grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 10px;
-    padding: 10px;
-    margin-bottom: 100px;
-}
-
-
-
-.divlink {
-    background-color: purple;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    padding-bottom: 20px;
-}
-
-.fdiv {
-    background-image: url('./istockphoto-1400086779-170667a.jpg');
-}
-
-.sediv {
-    background-image: url('./istockphoto-1400086779-170667a.jpg');
-}
-
-.thdiv {
-    background-image: url('./istockphoto-1400086779-170667a.jpg');
-}
-
-.divlink h1 {
-    letter-spacing: 2px;
-    color: white;
-    padding-bottom: 6px;
-
-}
-
-@media only screen and (max-width: 1100px) {
-    .MyDiv {
-        grid-template-columns: repeat(4, minmax(100px, 250px));
+@media only screen and (max-width: 800px) {
+    .divlink {
+        height: 300px;
     }
-}
 
-@media only screen and (max-width: 900px) {
-    .MyDiv {
-        grid-template-columns: repeat(3, minmax(100px, 250px));
+    .Img {
+        height: 300px;
+
     }
-}
 
-@media only screen and (max-width: 750px) {
-    .MyDiv {
-        display: flex;
-        justify-content: start;
-        padding: 10px 10px;
+    .btn {
+        top: -170px;
     }
 }

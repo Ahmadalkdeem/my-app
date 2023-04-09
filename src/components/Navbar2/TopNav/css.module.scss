@@ -1,18 +1,18 @@
-.MyDiv {
+.Div {
     display: block;
 }
 
-.MyIcon {
+.Icon {
     color: black;
     margin: 0 6.5px;
 }
 
-.MyIcon:hover {
+.Icon:hover {
     color: black;
 }
 
 @media only screen and (max-width: 991.5px) {
-    .MyDiv {
+    .Div {
         margin-top: 15px;
     }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import css from './acording.module.scss'
-interface acording { question: string, answer: string }
+import { acording } from '../../@types/Acording'
 const data: acording[] = [
     {
         question: 'תיאור', answer: `עד הבית או למקום העבודה שלך? משלוח מהיר ובטוח לאן שאת תחליטי.
@@ -30,7 +30,6 @@ function Acording(e: { aa: string }) {
 
     return (
         <div>
-
             {data.map((item: acording, i: any) => (
                 <div key={i} className={css.item}>
                     <div className={`${css.mytitel} d-flex justify-content-between`} onClick={() => { toggle(i) }} >

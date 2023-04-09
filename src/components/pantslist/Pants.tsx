@@ -28,6 +28,7 @@ function Shose() {
 
     return (
         <div>
+
             <Cardlist h1='מכנסיים גבריים' users={users2} />
             <button onClick={() => {
                 if (end === true) {

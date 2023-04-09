@@ -1,0 +1,15 @@
+.carousel-indicators button {
+  position: relative;
+  top: 50px;
+
+  background-color: black !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50%;
+}
+.carousel-control-prev {
+  width: auto !important;
+}
+.carousel-control-next {
+  width: auto !important;
+}

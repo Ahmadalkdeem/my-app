@@ -5,32 +5,31 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import { Cardtype } from '../../@types/Mytypes';
 import { Link } from 'react-router-dom';
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { BsXCircleFill } from "react-icons/bs";
+import { useAppDispatch } from '../../app/hooks';
+import { addCard, deleteCard, editCard } from '../../features/cards/mycart';
 
-function MyCard(props: Cardtype) {
+function MyCard(props: any) {
+    let Dispatch = useAppDispatch()
 
     return (
-        <Link className={css.mmlink} to='/'>
-            <Card className={css.MyCard}>
-                <div className={`d-flex justify-content-between ${css.myediticon}`}>
-                    <Link className={css.mmlink} to='/about'>    <AiFillDelete className={css.Icons} size={30} />
-                    </Link >
-                    <Link className={css.mmlink} to='/about'>    <AiFillEdit className={css.Icons} size={30} />
-                    </Link >
-
+        <Card className={css.Card}>
+            <Card.Img className={`${css.Img}`} variant="top" src={props.src[0]} alt={props.name} />
+            <Card.Body className='pt-0'>
+                <Card.Title className={css.titel}>{props.name}</Card.Title>
+                <Card.Text>
+                    <span className={css.P}>{props.hselect}</span>
+                    <span className={css.P}>{props.color}</span>
+                    <span className={css.P}>{props.sizeselect}</span>
+                </Card.Text>
+                <div className={css.Endcard}>
+                    <BsXCircleFill onClick={() => {
+                        Dispatch(deleteCard(props._id))
+                    }} className={css.Icon} size={30} />
+                    <Button className={`${css.Btn} bg-dark border-0 `}>{props.price}$</Button>
                 </div>
-                <Card.Img className={`${css.MyImg}`} variant="top" src={props.src} alt={props.name} />
-                <Card.Body>
-                    <Card.Title className={css.Mytitel}>{props.name}</Card.Title>
-                    <Card.Text className={css.Myp}>
-                        {props.description}
-                    </Card.Text>
-                    <div className={css.MyEndcard}>
-                        <BsFillCartCheckFill className={css.MyIcon} size={35} />
-                        <Button className={`${css.MyBtn} bg-dark border-0 `}>{props.price}$</Button>
-                    </div>
-                </Card.Body>
-            </Card>
-        </Link >
+            </Card.Body>
+        </Card>
     )
 }
 

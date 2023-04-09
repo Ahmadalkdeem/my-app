@@ -1,79 +1,21 @@
 import React from 'react'
-import Reactselect from '../Reactselect/Reactselect'
 import Select from 'react-select'
 import { useState } from 'react'
 import axios from 'axios';
 import css from './css.module.scss'
 import { AiOutlineUpload } from "react-icons/ai";
-export interface ColourOption {
-    value: string;
-    label: string;
-
-}
-
-export const brands: ColourOption[] = [
-    { value: 'boss', label: 'boos' },
-    { value: 'underarmur', label: 'underarmur' },
-    { value: 'kelvenkline', label: 'kelvenkline' },
-
-];
-export const category: ColourOption[] = [
-    { value: 'חולצות', label: 'חולצות' },
-    { value: 'מכנסים', label: 'מכנסים' },
-    { value: 'נעלים', label: 'נעלים' },
-
-];
-export const colourOptions: ColourOption[] = [
-    { value: 'ocean', label: 'Ocean' },
-    { value: 'blue', label: 'Blue' },
-    { value: 'purple', label: 'Purple' },
-    { value: 'red', label: 'Red' },
-    { value: 'orange', label: 'Orange' },
-    { value: 'yellow', label: 'Yellow' },
-    { value: 'green', label: 'Green' },
-    { value: 'forest', label: 'Forest' },
-    { value: 'slate', label: 'Slate' },
-    { value: 'silver', label: 'Silver' },
-];
-export const SizeOptions: ColourOption[] = [
-    { value: 'XS', label: 'XSmall' },
-    { value: 'S', label: 'Small' },
-    { value: 'M', label: 'Medume' },
-    { value: 'L', label: 'Large' },
-    { value: 'XL', label: 'XLarge' },
-    { value: '2XL', label: '2XLarge' },
-    { value: '3XL', label: '3XLarge' },
-    { value: '4XL', label: '4XLarge' },
-    { value: '5XL', label: '5XLarge' },
-    { value: '6XL', label: '6XLarge' },
-];
-
-
-let xx: any = {
-    control: (base: any) => ({
-        ...base,
-        border: '1.5px solid black',
-        borderRadius: '4px',
-        boxShadow: 'none',
-        '&:hover': {
-            border: '1.5px solid black'
-        }
-    }), option: (base: any, state: any) => ({
-        ...base,
-        color: "#1e2022",
-        textAlign: 'center',
-
-    })
-}
+import { optionstype } from '../../@types/Mytypes';
+import { SizeOptions, brands, SizeOptions2, stylelableOption, categorys, colourOptions, } from '../../arrays/list'
 function Editpage() {
     const [photo7, setphoto7] = useState<any>([])
     const [description, setdescription] = useState('')
     const [titel, settitel] = useState('')
+    const [brand, setbrand] = useState('')
     const [Permissivecategory, setPermissivecategory] = useState('')
     const [secondarycategory, setsecondarycategory] = useState('')
     const [saleprice, setsaleprice] = useState('')
     const [regularprice, setregularprice] = useState('')
-    const [fcolourOptions, setfcolourOptions] = useState<ColourOption[]>([])
+    const [fcolourOptions, setfcolourOptions] = useState<optionstype[]>([])
     const [fSizeOptions2, setSizeOptions2] = useState<any>([])
 
     let x: any[] = []
@@ -85,20 +27,12 @@ function Editpage() {
                 fcolourOptions.forEach((cc) => {
                     colors.push({ color: cc.value })
                 })
-
                 console.log(fSizeOptions2.find((e: any) => e.size === ee.value));
                 console.log(fSizeOptions2.findIndex((e: any) => e.size === ee.value));
-
                 setSizeOptions2((err: any) => [...err, { size: ee.value, colors: colors }])
-
             } else {
-
-
             }
-
-
         })
-
     }
 
 
@@ -110,14 +44,11 @@ function Editpage() {
         formData.append('setPermissivecategory', Permissivecategory)
         formData.append('categoryselect2', secondarycategory)
         formData.append('titel', titel)
+        formData.append('brand', brand)
         formData.append('description', description)
         formData.append('saleprice', saleprice)
         formData.append('regularprice', regularprice)
         formData.append('fSizeOptions2', JSON.stringify(fSizeOptions2))
-        // formData.append('fSizeOptions2', JSON.stringify(fSizeOptions2[1]))
-
-        console.log(formData);
-
         axios.post("http://localhost:3001/uplode/user-profile", formData, {
         }).then((res: any) => {
             console.log(res.data)
@@ -125,7 +56,6 @@ function Editpage() {
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
-
             const term = err.response.data
             const regex = /Only .png, .jpg and .jpeg format allowed!/g
             const regex2 = /File too large/g
@@ -133,9 +63,6 @@ function Editpage() {
             const isExist2 = term.match(regex2)
             if (isExist) console.log("Image must be one of type jpg...");
             if (isExist2) console.log("File too large");
-
-
-
         })
     }
 
@@ -144,25 +71,36 @@ function Editpage() {
             <h3>הוספת מוצר:</h3>
             <div className="label-input d-flex flex-column">
                 <Select
-                    options={category}
+                    options={categorys}
                     onChange={(e: any) => {
                         console.log(e);
                         setPermissivecategory(e.value)
                     }}
-                    styles={xx}
+                    styles={stylelableOption}
 
                     placeholder='קטגוריה רשית'
                 />
                 <br />
                 <Select
-                    options={category}
+                    options={categorys}
                     onChange={(e: any) => {
                         console.log(e);
                         setsecondarycategory(e.value)
                     }}
-                    styles={xx}
+                    styles={stylelableOption}
 
                     placeholder='קטגוריה משנית'
+                />
+                <br />
+                <Select
+                    options={brands}
+                    onChange={(e: any) => {
+                        console.log(e);
+                        setbrand(e.value)
+                    }}
+                    styles={stylelableOption}
+
+                    placeholder='שם החברה'
                 />
                 <br />
                 <input placeholder='שם המוצר' onChange={(e) => {
@@ -201,7 +139,7 @@ function Editpage() {
                         console.log(e);
                         setfcolourOptions(e);
                     }}
-                    styles={xx}
+                    styles={stylelableOption}
 
                     placeholder='צבעים'
                 />
@@ -209,11 +147,11 @@ function Editpage() {
                 <Select
                     closeMenuOnSelect={false}
                     isMulti
-                    options={SizeOptions}
+                    options={Permissivecategory === 'shoes' ? SizeOptions2 : SizeOptions}
                     onChange={(e: any) => {
                         poo(e)
                     }}
-                    styles={xx}
+                    styles={stylelableOption}
                     placeholder='מידות'
                 />
 

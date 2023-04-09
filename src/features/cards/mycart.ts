@@ -21,10 +21,14 @@ const cardpants = createSlice({
             const cardToEdit = action.payload;
 
             //find the index of the card to edit:
-            const index = state.cart.findIndex((c: any) => c._id === action.payload._id);
+            const index = state.cart.findIndex((c: any) => c._id === action.payload.id);
+            // const x = state.cart.find((c: any) => c._id === action.payload.id);
+            // console.log(x);
 
+            // let x = state.cart[index]
+            // x.quantity = x.quantity + cardToEdit.quantity
             //replace the card at index with:
-            state.cart[index] = cardToEdit;
+            state.cart[index].quantity = state.cart[index].quantity + cardToEdit.quantity;
         },
         deleteCard: (state, action) => {
             //action.payload = id of the card to remove

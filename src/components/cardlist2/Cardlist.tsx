@@ -1,38 +1,13 @@
 import Select from 'react-select'
 import { useState, useEffect } from 'react'
-import MyCard from '../card3/Card'
+import MyCard from '../card/Card'
 import css from './css.module.scss'
-import { productss } from '../../features/counter/List'
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { Cardtype } from "../../@types/Mytypes"
-import phto1 from './istockphoto-1400086779-170667a.jpg'
-import axios from 'axios'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { fetchUsers } from '../../features/cards/cardshirts'
-let xx: any = {
-    control: (base: any) => ({
-        ...base,
-        border: '1.5px solid black',
-        borderRadius: '4px',
-        boxShadow: 'none',
-        '&:hover': {
-            border: '1.5px solid black'
-        }
-    }), option: (base: any, state: any) => ({
-        ...base,
-        color: "#1e2022",
-        textAlign: 'center',
-        // zIndex: '9999999999'
-    })
-}
-
-
-
-const SizeOptions: any = [];
-const SizeOptions2: any = [];
-
-let zxcv: any = []
-function Cardlist(props: { users: [], h1: string }) {
+import { Container, Row, Col } from 'react-bootstrap';
+import { stylelableOption } from '../../arrays/list'
+function Cardlist(props: { h1: string, users: [] }) {
+    const SizeOptions: any = [];
+    const SizeOptions2: any = [];
     props.users.forEach((e: Cardtype) => {
         let x = SizeOptions.find((ee: any) => ee.value === e.name)
         let y = SizeOptions2.find((ee: any) => ee.value === e.category2)
@@ -49,75 +24,64 @@ function Cardlist(props: { users: [], h1: string }) {
 
     return (
         <>
+            <h1 className={css.h1}>{props.h1}</h1>
+            <div className={css.selestdiv}>
 
-            <h1 id='top' className={css.Myhh1}>
-                {props.h1}
-            </h1>
-            <Select
-                id='SizeOptions'
-                options={SizeOptions}
-                onChange={(e: any) => {
-                    console.log(e);
-                    setmylist('')
+                <Select
+                    id='SizeOptions'
+                    options={SizeOptions}
+                    onChange={(e: any) => {
+                        console.log(e);
+                        setmylist('')
 
-                    setsize(e.value)
-                }}
-                styles={xx}
-                onMenuOpen={() => {
-                    setmylist('SizeOptions')
-                    console.log('aa');
+                        setsize(e.value)
+                    }}
+                    styles={stylelableOption}
+                    onMenuOpen={() => {
+                        setmylist('SizeOptions')
+                    }}
+                    onMenuClose={() => {
+                        setmylist('')
+                    }}
+                    className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
+                    placeholder='שם מוצר'
+                />
+                <Select
+                    id='SizeOptions2'
+                    options={SizeOptions2}
+                    onChange={(e: any) => {
+                        setmylist('')
+                        setserahre(e.value)
+                    }}
+                    styles={stylelableOption}
+                    onMenuOpen={() => {
+                        setmylist('SizeOptions2')
+                    }}
 
-                }}
-                onMenuClose={() => {
-                    console.log('bb');
-                    setmylist('')
-                }}
-                className={mylist === 'SizeOptions' ? `${css.mmyselest}` : ''}
-                placeholder='שם מוצר'
-            />
-            <Select
-                id='SizeOptions2'
-                options={SizeOptions2}
-                onChange={(e: any) => {
-                    console.log(e);
-                    setmylist('')
-
-                    setserahre(e.value)
-                }}
-                styles={xx}
-                onMenuOpen={() => {
-                    setmylist('SizeOptions2')
-                }}
-
-                onMenuClose={() => {
-                    setmylist('')
-                }}
-                className={mylist === 'SizeOptions2' ? `${css.mmyselest}` : ''}
-                placeholder='קטגוריה משנית'
-            />
-            <div className={`${css.MyDiv}`}>
-
-                {props.users.length > 0 && props.users.filter((val: Cardtype) => {
-                    if (size === '' && serahre === '') {
-                        return val
-                    } else if (val.name.includes(size) && serahre === '') {
-                        return val
-                    } else if (val.category2.includes(serahre) && size === '') { return val }
-                    else if (val.category2.includes(serahre) && val.name.includes(size)) { return val }
-                }).map((number: any, i: number) => (
-                    <MyCard key={i} {...number} />))}
-                {/* {zxcv.filter((val: Cardtype) => {
-                    if (size === '' && serahre === '') {
-                        return val
-                    } else if (val.name.includes(size) && serahre === '') {
-                        return val
-                    } else if (val.category2.includes(serahre) && size === '') { return val }
-                    else if (val.category2.includes(serahre) && val.name.includes(size)) { return val }
-                }).map((number: any, i: number) => (
-                    <MyCard key={i}
-                        {...number} />
-                ))} */}
+                    onMenuClose={() => {
+                        setmylist('')
+                    }}
+                    className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
+                    placeholder='קטגוריה משנית'
+                />
             </div>
+            <Container className={`Container ${css.Container}`} fluid>
+                <Row xs={2} sm={3} lg={4} xxl={5}>
+
+                    {props.users.length > 0 && props.users.filter((val: Cardtype) => {
+                        if (size === '' && serahre === '') {
+                            return val
+                        } else if (val.name.includes(size) && serahre === '') {
+                            return val
+                        } else if (val.category2.includes(serahre) && size === '') { return val }
+                        else if (val.category2.includes(serahre) && val.name.includes(size)) { return val }
+                    }).map(((product: any, i: number) => (
+                        <Col key={i} className="mt-2 p-1">
+                            <MyCard key={i}
+                                {...product} />
+                        </Col>)))}
+                </Row>
+            </Container>
         </>
     )
 }

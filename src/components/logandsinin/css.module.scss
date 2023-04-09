@@ -1,4 +1,4 @@
-.mydiv {
+.div {
     margin-top: 50px;
     width: 100%;
     display: flex;
@@ -7,7 +7,7 @@
     gap: 2%;
 }
 
-.Mybtn2 {
+.btn2 {
     height: 40px;
     font-size: 20px;
     width: 34%;
@@ -17,7 +17,7 @@
     border-radius: 7px;
 }
 
-.MybtnActiv {
+.btnActiv {
     height: 40px;
     font-size: 20px;
     width: 34%;
@@ -27,7 +27,7 @@
     border-radius: 7px;
 }
 
-.Myinput {
+.input {
     width: 70%;
     outline: none;
     border: 1px solid #ced4da;
@@ -36,16 +36,16 @@
     border-radius: 7px;
 }
 
-.Mylable {
+.lable {
     width: 70%;
     margin: -10px 0 0 0;
 }
 
-.Myh5 {
+.h5 {
     text-align: center;
 }
 
-.Mybtn {
+.btn {
     height: 40px;
     font-size: 20px;
     width: 70%;
@@ -55,58 +55,58 @@
     border-radius: 7px;
 }
 
-.Mybtn:hover {
+.btn:hover {
     background-color: yellow;
 }
 
-.MyP {
+.P {
     width: 70%;
     padding: 0 4px;
-    font-size: 14px;
+    font-size: 12px;
     color: red;
     font-weight: 500;
 }
 
 @media only screen and (max-width: 600px) {
-    .Myinput {
+    .input {
         width: 85%;
     }
 
-    .Mybtn2 {
+    .btn2 {
         width: 40.5%;
     }
 
-    .Mylable {
+    .lable {
         width: 85%;
     }
 
-    .Mybtn {
+    .btn {
         width: 85%;
     }
 
-    .MyP {
+    .P {
         width: 85%;
     }
 }
 
 @media only screen and (max-width: 300px) {
-    .Myinput {
+    .input {
         width: 95%;
     }
 
-    .MyP {
+    .P {
         width: 95%;
     }
 
-    .Mybtn2 {
+    .btn2 {
         width: 45.5%;
     }
 
-    .Mylable {
+    .lable {
         width: 95%;
     }
 
-    .Mybtn {
+    .btn {
         width: 95%;
     }
 }

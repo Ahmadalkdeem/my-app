@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import axios from 'axios';
 import { addCard, deleteCard, editCard } from '../../features/cards/mycart';
+import './style.css'
 interface acording { question: string, answer: string };
 let fitem = {
     category: "Shirts",
@@ -21,10 +22,12 @@ let fitem = {
     _id: '64160b7969fc817052a517d0'
 }
 function Page() {
-    let { id, scatgre, fcatgre } = useParams()
-    const [qwert, setqwert] = useState<any>(fitem)
+    let { id, scategory, fcategory } = useParams()
+    const [Theitem, setTheitem] = useState<any>(fitem)
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     let onDispatch = useAppDispatch()
     let { cart } = useAppSelector((s) => s.mycart)
 
@@ -35,7 +38,7 @@ function Page() {
 
     const getData = async (e: { category: string, id: string }) => {
         const { data } = await axios.get(`http://localhost:3001/uplode/findOne/${e.category}/${e.id}`);
-        setqwert(data)
+        setTheitem(data)
         setState(data.stock[0].size)
         setcolor(data.stock[0].colors[0].color)
         console.log(data);
@@ -43,33 +46,32 @@ function Page() {
     };
 
     const item = () => {
-
-        if (fcatgre === 'shoes') {
+        if (fcategory === 'shoes') {
             let x = users3.find((e: any) => e._id === id)
             if (x === undefined) {
                 getData({ category: 'shoes', id: `${id}` })
             } else {
-                setqwert(x)
+                setTheitem(x)
                 setState(x.stock[0].size)
                 setcolor(x.stock[0].colors[0].color)
             }
         }
-        if (fcatgre === 'Shirts') {
+        if (fcategory === 'Shirts') {
             let x = users.find((e: any) => e._id === id)
             if (x === undefined) {
                 getData({ category: 'Shirts', id: `${id}` })
             } else {
-                setqwert(x)
+                setTheitem(x)
                 setState(x.stock[0].size)
                 setcolor(x.stock[0].colors[0].color)
             }
         }
-        if (fcatgre === 'pants') {
+        if (fcategory === 'pants') {
             let x = users2.find((e: any) => e._id === id)
             if (x === undefined) {
                 getData({ category: 'pants', id: `${id}` })
             } else {
-                setqwert(x)
+                setTheitem(x)
                 setState(x.stock[0].size)
                 setcolor(x.stock[0].colors[0].color)
             }
@@ -79,50 +81,50 @@ function Page() {
         item()
     }, []);
 
-    let x = qwert.stock
-    const [state, setState] = useState(qwert.stock[0].size)
-    const [color, setcolor] = useState(`${qwert.stock[0].colors[0].color}`)
-    let zz = qwert.stock.find((xx: any) => xx.size === state)
+    let x = Theitem.stock
+    const [state, setState] = useState(Theitem.stock[0].size)
+    const [color, setcolor] = useState(`${Theitem.stock[0].colors[0].color}`)
+    let zz = Theitem.stock.find((xx: any) => xx.size === state)
 
     const [state2, setState2] = useState(1)
 
-    let tt = { sizeselect: state, color: color, hselect: state2 }
-    console.log(tt);
+    let order = { sizeselect: state, color: color, quantity: state2 }
+    console.log(order);
 
     const [toggler, setToggler] = useState(false);
     const [show, setshow] = useState('');
     return (
         <>
-            {qwert === fitem ? '' : <>
-                <div className={css.myfdiv}>
+            {Theitem === fitem ? '' : <>
+                <div className={css.div}>
                     <FsLightbox
                         toggler={toggler}
-                        sources={qwert.src}
+                        sources={Theitem.src}
                         source={show}
                         type="image"
 
 
                     />
-                    <Carousel dir="ltr" className={`${css.mycorsla}`}>
-                        {qwert?.src.map((e: any, i: number) =>
+                    <Carousel dir="ltr" className={`${css.corsla}`}>
+                        {Theitem?.src.map((e: any, i: number) =>
                             <Carousel.Item key={i} interval={100000000000000} >
                                 <img
                                     onClick={() => {
                                         setToggler(!toggler)
                                         setshow(e)
                                     }}
-                                    className={css.MyImg}
+                                    className={css.Img}
                                     src={e}
-                                    alt={qwert?.name}
+                                    alt={Theitem?.name}
                                 />
                             </Carousel.Item>
                         )}
 
                     </Carousel>
                     <div className='p-3'>
-                        <h3 className={`${css.myh4} text-center mt-2`}>{qwert?.name}</h3>
-                        <h5 className={`text-center d-flex justify-content-center align-items-center ${css.myprice}`}>{qwert?.price}₪ <span className={css.Mydelateprice}>{qwert?.price2}₪</span></h5>
-                        <h5 className={css.myh5}>מידות:</h5>
+                        <h3 className={`${css.h3} text-center mt-2`}>{Theitem?.name}</h3>
+                        <h5 className={`text-center d-flex justify-content-center align-items-center ${css.price}`}>{Theitem?.price}₪ <span className={css.delateprice}>{Theitem?.price2}₪</span></h5>
+                        <h5 className={css.h5}>מידות:</h5>
                         <div className='d-flex justify-content-center align-content-center flex-column '>
                             <div className={css.divsizes}>
 
@@ -139,18 +141,18 @@ function Page() {
                                             } else {
                                             }
                                         }
-                                    }} className={number.size === `${state}` ? `${css.MyBtn1} ${css.MyBtn11}` : `${css.MyBtn1}`}>{number.size}</div>
+                                    }} className={number.size === `${state}` ? `${css.Btn1} ${css.Btn11}` : `${css.Btn1}`}>{number.size}</div>
                                 )}
                             </div>
 
-                            <h5 className={css.myh5}>צבעים:</h5>
+                            <h5 className={css.h5}>צבעים:</h5>
                             <div className={css.divsizes}>
                                 {zz === undefined ? '' : zz.colors.map((number: any, i: number) =>
-                                    <button key={i} onClick={() => { if (color === number.color) { } else { setcolor(number.color) } }} className={color === number.color ? `${css.MyBtn22} ${css.MyBtn11}` : `${css.MyBtn22}`}> <span style={{ background: number.color }} className={css.myyspan}></span></button>
+                                    <button key={i} onClick={() => { if (color === number.color) { } else { setcolor(number.color) } }} className={color === number.color ? `${css.Btn22} ${css.Btn11}` : `${css.Btn22}`}> <span style={{ background: number.color }} className={css.span}></span></button>
                                 )}
                             </div>
 
-                            <h5 className={css.myh5}>כמות:</h5>
+                            <h5 className={css.h5}>כמות:</h5>
                             <div className='d-flex justify-content-center align-content-center'>
                                 <div className={css.sizes}>
                                     <button onClick={() => {
@@ -158,20 +160,20 @@ function Page() {
                                         } else {
                                             setState2(state2 + 1)
                                         }
-                                    }} className={css.MyBtn2}>+</button>
+                                    }} className={css.Btn2}>+</button>
                                     <div className={css.amount}>{state2}</div>
                                     <button onClick={() => {
                                         if (state2 === 1) { } else {
                                             setState2(state2 - 1)
                                         }
-                                    }} className={css.MyBtn2}>-</button>
+                                    }} className={css.Btn2}>-</button>
                                 </div>
                             </div>
                         </div>
-                        <button className={css.MyBtn} onClick={() => {
-                            onDispatch(addCard({ ...qwert, ...tt }))
+                        <button className={css.Btn} onClick={() => {
+                            onDispatch(addCard({ ...Theitem, ...order }))
                         }}>הוספה לסל קניות</button>
-                        <Acording aa={`${qwert?.description}`} />
+                        <Acording aa={`${Theitem?.description}`} />
                     </div>
                 </div >
             </>}
