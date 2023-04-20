@@ -8,7 +8,7 @@ const initialState: any = {
 };
 
 export const fetchUsers3 = createAsyncThunk<any[]>("user3/fetchUsers3", (length1: any) =>
-    fetch(`http://localhost:3001/uplode/shoesproduct/5/0`).then((res) => res.json())
+    fetch(`http://localhost:3001/uplode/shoesproduct/1/0`).then((res) => res.json())
 );
 
 // fetch user from api
@@ -17,7 +17,14 @@ const cardpants = createSlice({
     initialState,
     reducers: {
         addItem3: (state, action) => {
-            state.users3 = [...state.users3, ...action.payload];
+            let arr: any = []
+            action.payload.forEach((element: any) => {
+                const index = state.users3.findIndex((c: any) => c._id === element._id);
+                if (index === -1) {
+                    arr.push(element)
+                }
+            });
+            state.users3 = [...state.users3, ...arr];
         }, delteItem3: (state, action) => {
             const index = state.users3.findIndex((c: any) => c._id === action.payload);
 

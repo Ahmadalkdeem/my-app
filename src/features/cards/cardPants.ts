@@ -6,10 +6,9 @@ const initialState: any = {
     error2: "",
     users2: [],
 };
-console.log(initialState.users2.length);
 
 export const fetchUsers2 = createAsyncThunk<any[]>("user2/fetchUsers2", (length1: any) =>
-    fetch(`http://localhost:3001/uplode/pantsproduct/5/0`).then((res) => res.json())
+    fetch(`http://localhost:3001/uplode/pantsproduct/1/0`).then((res) => res.json())
 );
 
 // fetch user from api
@@ -18,8 +17,16 @@ const cardpants = createSlice({
     initialState,
     reducers: {
         addItem2: (state, action) => {
-            state.users2 = [...state.users2, ...action.payload];
-        }, delteItem2: (state, action) => {
+            let arr: any = []
+            action.payload.forEach((element: any) => {
+                const index = state.users2.findIndex((c: any) => c._id === element._id);
+                if (index === -1) {
+                    arr.push(element)
+                }
+            });
+            state.users2 = [...state.users2, ...arr];
+        },
+        delteItem2: (state, action) => {
             const index = state.users2.findIndex((c: any) => c._id === action.payload);
 
             //delete the card at index:

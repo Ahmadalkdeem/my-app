@@ -36,7 +36,13 @@ function Acording(e: { aa: string }) {
                         <h5>{item.question}</h5>
                         <h5 className='fw-bold '>{acording === i ? '-' : '+'}</h5>
                     </div>
-                    <div className={acording === i ? `${css.acordingn} ${css.conact}` : `${css.acordingn}`}>{item.answer}</div>
+                    <div className={acording === i ? `${css.acordingn} ${css.conact}` : `${css.acordingn}`}>
+                        {/* <pre> */}
+                        {/* <code> */}
+                        {item.answer}
+                        {/* </code> */}
+                        {/* </pre> */}
+                    </div>
                 </div>
             ))}
         </div>

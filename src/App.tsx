@@ -1,30 +1,50 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import MyNavbar from './components/Navbar2/Navbar/Navbar';
+import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
-import Mycart from './components/mycart/Mycart';
-import Cardlist from './components/cards/Cardlist';
-import Page from './components/pagecard/Page';
-import Editpage from './components/Editpage/Editpage ';
-import Bootstrapform from './components/logandsinin/Bootstrapform';
-import Shose from './components/shoselist/Shose';
-import Pants from './components/pantslist/Pants';
-import Shirt from './components/Shirtslist/shirts';
-import { useAppDispatch } from './app/hooks';
+import Mycart from './pages/mycart/Mycart';
+import Cardlist from './pages/cards/Cardlist';
+import Page from './pages/pagecard/Page';
+import Editpage from './pages/Editpage/Editpage ';
+import Bootstrapform from './pages/logandsinin/Bootstrapform';
+import Shose from './pages/shoselist/Shose';
+import Pants from './pages/pantslist/Pants';
+import Shirt from './pages/Shirtslist/shirts';
+import { useAppDispatch, useAppSelector } from './app/hooks';
 import { fetchUsers } from './features/cards/cardshirts';
 import { fetchUsers2 } from './features/cards/cardPants';
 import { fetchUsers3 } from './features/cards/cardshose';
-import About from './components/about/About';
+import About from './pages/about/About';
 import Footer from './components/footer/Footer';
-import Editeproduct from './components/Editeproduct/Editeproduct';
-import Order from './components/orders/Order';
-import Orderdetales from './components/orderdetales/Orderdetales';
-import Login from './components/logandsinin/Login';
-import Signup from './components/logandsinin/Signup';
-import Myslider from './components/slider/Slider';
-import Navbarr from './components/navbar/Navbar';
+import Editeproduct from './pages/Editeproduct/Editeproduct';
+import Order from './pages/orders/Order';
+import Orderdetales from './pages/orderdetales/Orderdetales';
+import Login from './pages/logandsinin/Login';
+import Signup from './pages/logandsinin/Signup';
+import { updatedetalise } from './features/user/user';
 function App() {
+
   let Dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const myData: any = localStorage.getItem("userdetalis");
+
+    if (myData === null || myData === undefined) { }
+    else {
+      axios.post('http://localhost:3001/api/auth/valtoken', {
+        token: JSON.parse(myData)
+      }).then((response) => {
+        Dispatch(updatedetalise(response.data))
+      }).catch(e => {
+        console.log(e);
+
+      })
+    }
+  }, []);
+
+
+  let { id, email, roles, username, accessToken } = useAppSelector(e => e.user)
   useEffect(() => {
     Dispatch(fetchUsers())
     Dispatch(fetchUsers2())
@@ -34,6 +54,7 @@ function App() {
   return (
     <>
       <MyNavbar />
+
       <Routes >
         <Route path='/' element={<Cardlist />} />
         <Route path='/home' element={<Cardlist />} />
@@ -47,11 +68,12 @@ function App() {
         <Route path='/Shirts' element={<Shirt />} />
         <Route path='/pants' element={<Pants />} />
         <Route path='/:fcategory/:scategory/:id' element={<Page />} />
-        <Route path='/orders' element={<Order />}>
-          <Route path='detales/:id' element={<Orderdetales />} />
-        </Route>
-        <Route path='/addproduct' element={<Editpage />} />
-        <Route path='/Editeproduct/:category/:id' element={<Editeproduct />} />
+        {roles[0] === 'admin' && <Route path='/addproduct' element={<Editpage />} />}
+        {roles[0] === 'admin' && <Route path='/orders' element={<Order />}>
+          <Route path='detales/:id2' element={<Orderdetales />} />
+        </Route>}
+        {roles[0] === 'admin' && <Route path='/Editeproduct/:category/:id' element={<Editeproduct />} />}
+
       </Routes>
       <Footer />
     </>

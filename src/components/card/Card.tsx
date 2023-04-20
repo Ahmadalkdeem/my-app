@@ -12,7 +12,11 @@ import { delteItem2 } from '../../features/cards/cardPants';
 import { delteItem3 } from '../../features/cards/cardshose';
 import { useAppDispatch } from '../../app/hooks';
 import axios from 'axios';
+import { useAppSelector } from '../../app/hooks';
+
 function MyCard(props: Cardtype) {
+    let { id, email, roles, username, accessToken } = useAppSelector(e => e.user)
+
     const Dispatch = useAppDispatch()
     const getData = async () => {
         Swal.fire({
@@ -23,7 +27,7 @@ function MyCard(props: Cardtype) {
             if (result.isConfirmed) {
                 axios.delete(`http://localhost:3001/uplode/delete/${props.category}/${props._id}`, {
                 }).then((response) => {
-                    console.log(response.data.Message);
+                    console.log(response.data);
                     if (response.data.Message === 'susces') {
                         if (props.category === 'Shirts') Dispatch(delteItem(props._id))
                         if (props.category === 'pants') Dispatch(delteItem2(props._id))
@@ -45,51 +49,55 @@ function MyCard(props: Cardtype) {
     const navigate = useNavigate();
     let discount = Math.floor(((props.price2 - props.price) / props.price2) * 100)
     return (
-        <Fade triggerOnce className={`${css.Card}`}>
+        // <Fade triggerOnce className={`${css.Card}`}>
+
+        <Card className={`${css.Card}`}>
+            {roles[0] === 'admin' && <div className={`d-flex justify-content-between ${css.divicon}`}>
+                <AiFillDelete onClick={getData} className={css.Icons} size={40} />
+                <AiFillEdit onClick={() => { navigate(`/Editeproduct/${props.category}/${props._id}`) }} className={css.Icons} size={40} />
+
+            </div>}
 
 
-            <Card className={`${css.Card}`}>
-                <div className={`d-flex justify-content-between ${css.divicon}`}>
-                    <AiFillDelete onClick={getData} className={css.Icons} size={40} />
-                    <AiFillEdit onClick={() => { navigate(`/Editeproduct/${props.category}/${props._id}`) }} className={css.Icons} size={40} />
 
-                </div>
+            <Carousel indicators={false} dir="ltr" className={`${css.corsla}`}>
 
-
-                <Carousel indicators={false} dir="ltr" className={`${css.corsla}`}>
-
-                    {props?.src.map((e: any, i: number) =>
-                        <Carousel.Item key={i} interval={100000000000000} >
-                            <img
-                                onClick={() => {
-                                    navigate(`/${props.category}/${props.category2}/${props._id}`);
-                                }}
-                                className={css.Img}
-                                src={`${e}`}
-                                alt="First slide"
-                            />
-                        </Carousel.Item>
-                    )}
-                </Carousel>
+                {props?.src.map((e: any, i: number) =>
+                    <Carousel.Item key={i} interval={100000000000000} >
+                        <img
+                            onClick={() => {
+                                navigate(`/${props.category}/${props.category2}/${props._id}`);
+                            }}
+                            className={css.Img}
+                            src={`${e}`}
+                            alt="First slide"
+                        />
+                    </Carousel.Item>
+                )}
+            </Carousel>
 
 
-                <Card.Body className={css.bodycard}>
-                    <Card.Title onClick={() => {
-                        navigate(`/${props.category}/${props.category2}/${props._id}`);
-                    }} className={css.titel}>{props.name}</Card.Title>
-                    <Card.Text onClick={() => {
-                        navigate(`/${props.category}/${props.category2}/${props._id}`);
-                    }} className={css.P}>
-                        <span className='d-flex justify-content-center align-items-center flex-wrap g-2'>
+            <Card.Body className={css.bodycard}>
+                <Card.Title onClick={() => {
+                    navigate(`/${props.category}/${props.category2}/${props._id}`);
+                }} className={css.titel}>{props.name}</Card.Title>
+                <Card.Title onClick={() => {
+                    navigate(`/${props.category}/${props.category2}/${props._id}`);
+                }} className={css.brand}>{props.brand}</Card.Title>
+                <Card.Text onClick={() => {
+                    navigate(`/${props.category}/${props.category2}/${props._id}`);
+                }} className={css.P}>
+                    <span className='d-flex justify-content-center align-items-center flex-wrap g-2'>
 
-                            <span className={css.span}>{props.price2}₪</span>
-                            <span >{props.price}₪</span>
-                        </span>
-                        <span className={css.discount}>{discount}% אחוז הנחה </span>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-        </Fade>
+                        <span className={css.span}>{props.price2}₪</span>
+                        <span >{props.price}₪</span>
+                    </span>
+                    <span className={css.discount}>{discount}% אחוז הנחה </span>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+
+        //     </Fade> 
     )
 }
 

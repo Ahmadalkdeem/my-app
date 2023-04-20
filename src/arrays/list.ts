@@ -1,8 +1,25 @@
 import { optionstype } from "../@types/Mytypes"
 export const brands: optionstype[] = [
-    { value: 'boss', label: 'boos' },
-    { value: 'underarmur', label: 'underarmur' },
-    { value: 'kelvenkline', label: 'kelvenkline' },
+    { value: 'Zara', label: 'Zara' },
+    { value: 'H&M', label: 'H&M' },
+    { value: `Victoria's Secret`, label: `Victoria's Secret` },
+    { value: `Burberry`, label: `Burberry` },
+    { value: `Tommy Hilfiger`, label: `Tommy Hilfiger` },
+    { value: `Nike`, label: `Nike` },
+    { value: `Adidas`, label: `Adidas` },
+    { value: `Ralph Lauren`, label: `Ralph Lauren` },
+    { value: `Calvin Klein`, label: `Calvin Klein` },
+    { value: `Gap`, label: `Gap` },
+    { value: `Mango`, label: `Mango` },
+    { value: `Ted Baker`, label: `Ted Baker` },
+    { value: `Versace`, label: `Versace` },
+    { value: `Gucci`, label: `Gucci` },
+    { value: `Balmain`, label: `Balmain` },
+    { value: `Dior`, label: `Dior` },
+    { value: `Berberry`, label: `Berberry` },
+    { value: `Louis Vuitton`, label: `Louis Vuitton` },
+    { value: `Armani`, label: `Armani` },
+    { value: `Bershka`, label: `Bershka` },
 
 ];
 export const categorys: optionstype[] = [
@@ -11,17 +28,28 @@ export const categorys: optionstype[] = [
     { value: 'shoes', label: 'shoes' },
 
 ];
+export const categorys2: optionstype[] = [
+    { value: 'Shirts', label: 'Shirts' },
+    { value: 'pants', label: 'pants' },
+    { value: 'shoes', label: 'shoes' },
+
+];
 export const colourOptions: optionstype[] = [
-    { value: 'ocean', label: 'Ocean' },
-    { value: 'blue', label: 'Blue' },
-    { value: 'purple', label: 'Purple' },
     { value: 'red', label: 'Red' },
-    { value: 'orange', label: 'Orange' },
-    { value: 'yellow', label: 'Yellow' },
+    { value: 'blue', label: 'Blue' },
     { value: 'green', label: 'Green' },
-    { value: 'forest', label: 'Forest' },
-    { value: 'slate', label: 'Slate' },
-    { value: 'silver', label: 'Silver' },
+    { value: 'yellow', label: 'Yellow' },
+    { value: 'Orange', label: 'Orange' },
+    { value: 'purple', label: 'Purple' },
+    { value: 'Pink', label: 'Pink' },
+    { value: 'Brown', label: 'Brown' },
+    { value: 'Black', label: 'Black' },
+    { value: 'White', label: 'White' },
+    { value: 'Gray', label: 'Gray' },
+    { value: 'Gold', label: 'Gold' },
+    { value: 'Magenta', label: 'Magenta' },
+    { value: 'Turquoise', label: 'Turquoise' },
+
 ];
 export const SizeOptions: optionstype[] = [
     { value: 'XS', label: 'XSmall' },

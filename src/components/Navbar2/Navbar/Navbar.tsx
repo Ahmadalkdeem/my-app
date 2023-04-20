@@ -5,8 +5,11 @@ import { NavLink } from "react-router-dom";
 import { useState } from 'react';
 import Topnav from '../TopNav/Topnav';
 import { Sling as Hamburger } from 'hamburger-react'
+import { useAppSelector } from '../../../app/hooks';
+import { BsCartCheck } from "react-icons/bs";
 
 function MyNavbar() {
+    let { id, email, roles, username, accessToken } = useAppSelector(e => e.user)
     const [count, setCount] = useState(false);
     const [color, setcolor] = useState(false);
     const [display, setdisplay] = useState(false);
@@ -27,7 +30,8 @@ function MyNavbar() {
         <header className={color === true ? css.MyHeader : `${css.MyHeader} ${css.MyHeader2}`}>
             <>
                 <Navbar className={`${css.MyNavbar}`} expand="lg" onToggle={() => setNavbarExpanded(!navbarExpanded)} expanded={navbarExpanded}>
-                    <NavLink className={`${css.Mylogo}  `} onClick={closenavbar} to="/">mtbrands</NavLink >
+                    {/* <NavLink className={`${css.Mylogo}  `} onClick={closenavbar} to="/">mtbrands</NavLink > */}
+                    <img className={css.logo} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzV_u0UjwQds2dccWrlW8TOF3RoJDRZ0-3Gv-7FUxIA&s" alt="logo" />
                     <Navbar.Toggle onClick={() => {
                         setCount(e => !e)
                     }} className='p-0 border-0 shadow-none fw-bold' aria-controls="basic-navbar-nav">
@@ -42,10 +46,12 @@ function MyNavbar() {
                                 <NavLink onClick={closenavbar} className={css.Mylink} to="/about">אודות</NavLink>
                                 <NavLink onClick={closenavbar} className={css.Mylink} to="/connection/login">התחברות</NavLink>
                                 <NavLink onClick={closenavbar} className={css.Mylink} to="/Mycard">סל קניות</NavLink>
-                                <NavLink onClick={closenavbar} className={css.Mylink} to="/addproduct">הוספה מוצר</NavLink>
-                                <NavLink onClick={closenavbar} className={css.Mylink} to="/orders">הזמנות</NavLink>
+                                {roles[0] === 'admin' && <NavLink onClick={closenavbar} className={css.Mylink} to="/addproduct">הוספה מוצר</NavLink>}
+                                {roles[0] === 'admin' && <NavLink onClick={closenavbar} className={css.Mylink} to="/orders">הזמנות</NavLink>}
+
                             </div>
                             <Topnav />
+                            {/* <BsCartCheck className=' m-lg-1' size={30} /> */}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
