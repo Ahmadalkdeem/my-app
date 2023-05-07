@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Gruppo&family=Magra:wght@400;700&family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Gruppo&family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800;900&display=swap');
+
 .corsla {
     margin: 0 auto;
     margin-bottom: 10px;
@@ -9,55 +12,62 @@
     width: 100% !important;
     height: 500px;
     object-fit: fill;
+    font-family: 'DM Sans', sans-serif;
 }
 
 .btncorsla {
     background: none;
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+    background: yellow;
     color: black;
     border: 2px solid black;
     font-weight: 500;
     border-radius: 4px;
     padding: 0 17px 5px 17px;
     font-size: 24px;
+    margin-top: 10px;
     transition: all ease-in-out 0.2s;
 }
 
 .Caption {
-    background-color: rgba(0, 0, 0, 0.52);
+    background-color: rgba(0, 0, 0, 0.32);
     height: 100% !important;
     display: flex;
+    font-size: 26px;
     justify-content: center;
     align-items: center;
     padding: 0 5%;
     flex-direction: column;
-    top: 30px;
+    bottom: 0 !important;
+    top: 0 !important;
     right: 0 !important;
     left: 0 !important;
 }
 
 .h3 {
-    font-family: 'Almarai', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 600;
     font-size: 65px;
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: yellow;
+
 }
 
 .p {
     font-size: 20px;
+    font-family: 'DM Sans', sans-serif;
 }
 
 
 
 @media only screen and (max-width: 600px) {
     .h3 {
-        font-size: 45px;
+        font-size: 35px;
     }
 
     .Caption {
-
         margin-bottom: 20px;
+    }
+
+    .p {
+        font-size: 17px;
     }
 }

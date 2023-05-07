@@ -6,7 +6,10 @@ import { Card, Container, Row, Col } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Myslider from '../../components/slider/Slider';
 import MYCarousel from '../../components/corsla/Carousel';
-//FcShipped
+import img from './Red Modern New Arrival Shoes Instagram Post.png'
+import img2 from './White Modern T-shirts Giveaway (A4 Document).png'
+import img3 from './Blue Minimalist Fashion Denim Facebook Post.png'
+import { Helmet } from "react-helmet";
 import { FcShipped } from "react-icons/fc";
 import { BiSupport } from "react-icons/bi";
 
@@ -19,18 +22,23 @@ function Cardlist() {
     const navigate = useNavigate();
     return (
         <>
+            <Helmet>
+                <title>ברוכים הבאים לאתר שלנו | חנות האופנה המובילה באינטרנט</title>
+                <meta name="description" content="כאן תוכלו למצוא את המגוון הרחב שלנו של מכנסיים, נעליים, חולצות ועוד. הזמינו עכשיו ותהיו מרוצים!" />
+                <meta name="keywords" content="אופנה, מכנסיים, נעליים, חולצות, חנות, אינטרנט, קניות" />
+            </Helmet>
             <MYCarousel />
             <Myslider />
             <h2 className={css.h2}>המוצרים החמים</h2>
             <Container className={`Container ${css.Container}`} fluid>
                 <Row xs={2} sm={3} lg={4} xxl={5}>
-                    {users.map((product: any, index: number) => (
+                    {users.slice(0, 10).map((product: any, index: number) => (
                         <Col key={index} className="mt-2 p-1">
                             <MyCard key={index}
                                 {...product} />
                         </Col>
                     ))}
-                    {users.map((product: any, index: number) => (
+                    {users3.slice(0, 10).map((product: any, index: number) => (
                         <Col key={index} className="mt-2 p-1">
                             <MyCard key={index}
                                 {...product} />
@@ -38,24 +46,12 @@ function Cardlist() {
                     ))}
                 </Row>
             </Container>
-            <Container className={`Container ${css.Container}`} fluid>
-                <Row xs={2} sm={3} lg={4} xxl={5}>
-                    {users3.map((product: any, index: number) => (
-                        <Col key={index} className="mt-2 p-1">
-                            <MyCard key={index}
-                                {...product} />
-                        </Col>
-                    ))}
-
-                </Row>
-            </Container>
-
 
             <div className={css.Div}>
                 <div onClick={() => {
                     navigate(`/Shirts`);
                 }} className={`${css.divlink}`}>
-                    <img className={css.Img} src="https://media.istockphoto.com/id/1125110782/photo/young-man-isolated-on-gray-textured-wall-smiling-while-pointing-with-index-finger-to-black-t.jpg?s=612x612&w=0&k=20&c=NVobF35a4ogVyf9PrSCIwASDL2vsH9evJiYYGXSBKKI=" alt="" />
+                    <img className={css.Img} src={img2} alt="" />
 
                     <div className='d-flex justify-content-center'>
 
@@ -65,7 +61,7 @@ function Cardlist() {
                 <div onClick={() => {
                     navigate(`/pants`);
                 }} className={`${css.divlink}`}>
-                    <img className={css.Img} src="https://columbia.scene7.com/is/image/ColumbiaSportswear2/1968251_MEDIUMOZONEWASH?$pra_pdp@2x$&v=1679388927" alt="" />
+                    <img className={css.Img} src={img3} alt="" />
                     <div className='d-flex justify-content-center'>
 
                         <button className={css.btn}>מכנסיים</button>
@@ -75,7 +71,7 @@ function Cardlist() {
                 <div onClick={() => {
                     navigate(`/shoes`);
                 }} className={`${css.divlink}`}>
-                    <img className={css.Img} src="https://preview.colorlib.com/theme/winter/img/feature_3.png" alt="" />
+                    <img className={css.Img} src={img} alt="" />
                     <div className='d-flex justify-content-center'>
 
                         <button className={css.btn}>נעליים</button>

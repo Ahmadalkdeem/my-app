@@ -3,17 +3,14 @@
     margin: 0 auto;
     max-width: 1500px;
     padding: 0 5% 30px 5%;
-    margin-top: 60px;
     display: flex;
+    gap: 20px;
     background-color: whitesmoke;
-}
-
-.corsla {
-    margin-left: 50px;
 }
 
 .Img {
     width: 400px;
+    min-height: 300px;
     object-fit: fill;
     vertical-align: middle;
 }
@@ -150,19 +147,22 @@
 
 
 @media only screen and (max-width: 900px) {
+    .div {
+        flex-direction: column;
+        gap: 0px;
+        padding: 0 15%;
+    }
+
     .Img {
-        width: 100% !important;
+        min-height: 250px;
         max-height: 650px;
+        width: 100%;
     }
 
     .corsla {
         margin: 0;
     }
 
-    .div {
-        flex-direction: column;
-        padding: 0px 12% 30px 12%;
-    }
 
     .div2 {
         width: 100%;
@@ -171,13 +171,17 @@
 
 @media only screen and (max-width: 650px) {
     .div {
-        padding: 0;
-        width: 100%;
-        margin-right: 0;
+        padding: 0 7%;
     }
 
     .Img {
         height: auto;
         max-height: 500px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .div {
+        padding: 0;
     }
 }

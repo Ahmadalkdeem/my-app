@@ -8,7 +8,7 @@ const initialState: any = {
 };
 
 export const fetchUsers2 = createAsyncThunk<any[]>("user2/fetchUsers2", (length1: any) =>
-    fetch(`http://localhost:3001/uplode/pantsproduct/1/0`).then((res) => res.json())
+    fetch(`http://localhost:3001/uplode/pantsproduct/30/0`).then((res) => res.json())
 );
 
 // fetch user from api

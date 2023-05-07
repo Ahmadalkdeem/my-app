@@ -4,6 +4,8 @@ import axios from 'axios'
 import Cardlist from '../../components/cardlist2/Cardlist';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { addItem } from '../../features/cards/cardshirts';
+import Spiner from '../../components/Spiner/Spiner';
+import { Helmet } from "react-helmet";
 
 function Shose() {
     const [end, setend] = useState<any>(true);
@@ -12,6 +14,8 @@ function Shose() {
 
     const getData = async () => {
         if (end === true) {
+            console.log('aa');
+
             setend(false)
             axios.get(`http://localhost:3001/uplode/Shirtsproduct/1/${users.length}`, {
             }).then((response) => {
@@ -37,26 +41,23 @@ function Shose() {
         const windowHeight = window.innerHeight;
         const bodyHeight = document.body.clientHeight;
         const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
-
         if (scrollPercentage > 50) {
             getData()
         }
     }
-    console.log(users);
 
 
     return (
         <>
-            <Cardlist h1='חולצות גבריים' users={users} />
+            <Helmet>
+                <title>קנו חולצות לגברים ונשים בחנות האופנה המובילה באינטרנט</title>
+                <meta name="description" content="גלו את המגוון הרחב שלנו של חולצות לגברים ונשים, כולל חולצות טי, חולצות פולו, חולצות חורף ועוד. הזמינו עכשיו ותהיו בטופ!" />
+                <meta name="keywords" content="חולצות, טי, פולו, חורף, אופנה, חנות, אינטרנט," />
+            </Helmet>
+            {loading === true && <Spiner />}
+            {users.length > 0 && <Cardlist h1='חולצות גבריים' users={users} />}
+            {error && <div>{error}</div>}
 
-            <button onClick={() => {
-                if (end === true) {
-                    console.log('aaa');
-
-                    getData()
-                }
-
-            }}>ahmad</button>
         </>
     )
 }

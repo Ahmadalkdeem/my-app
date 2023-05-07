@@ -1,5 +1,6 @@
 .Div {
     display: block;
+
 }
 
 .Div2 {
@@ -27,5 +28,7 @@
 @media only screen and (max-width: 991.5px) {
     .Div {
         margin-top: 15px;
+        margin: 0 auto;
+        margin-bottom: 5px;
     }
 }

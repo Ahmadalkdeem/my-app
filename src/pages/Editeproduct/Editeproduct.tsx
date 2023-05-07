@@ -9,7 +9,7 @@ import { Cardtype } from '../../@types/Mytypes';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { optionstype } from '../../@types/Mytypes';
-import { SizeOptions, brands, SizeOptions2, categorys2, stylelableOption, categorys, colourOptions, } from '../../arrays/list'
+import { SizeOptions, brands, SizeOptions2, categorys2, categorys3, categorys4, stylelableOption, categorys, colourOptions, } from '../../arrays/list'
 function Editeproduct() {
     let Navigate = useNavigate()
     const getData = async (e: { category: string, id: string }) => {
@@ -21,6 +21,7 @@ function Editeproduct() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+    const [opsions, setopsions] = useState<any>([])
     const [photo7, setphoto7] = useState<any>([])
     const [photodelte, setphotodelte] = useState<any>([])
 
@@ -37,6 +38,7 @@ function Editeproduct() {
     const [fSizeOptions2, setSizeOptions2] = useState<any>([])
     const { id, category } = useParams()
     const { loading3, users3, error3 } = useAppSelector((s) => s.cardshose);
+    const { accessToken } = useAppSelector((s) => s.user);
     const { loading2, users2, error2 } = useAppSelector((s) => s.cardPants);
     const { loading, users, error } = useAppSelector((s) => s.cardshirts);
     const update = (x: Cardtype) => {
@@ -106,23 +108,42 @@ function Editeproduct() {
         })
     }
 
-
     const handleSaveStudentClicked = async () => {
+        if (description.length < 1500) console.log(true);
+        else { console.log(false); }
+        if (titel.length < 100) console.log(true);
+        else { console.log(false); }
+        if (description.length > 0 && titel.length > 0 && brand.length > 0 && Permissivecategory.length > 0 && secondarycategory.length > 0 && saleprice.length > 0 && regularprice.length > 0 && fSizeOptions2.length > 0) {
+            if (photo7.length > 0 || photos.length > 0) {
+                handleSaveStudentClicked2()
+            } else {
+                console.log('aaaa');
+
+            }
+        }
+        else {
+            console.log(false, false);
+
+        }
+    }
+
+    const handleSaveStudentClicked2 = async () => {
         const formData = new FormData()
         for (let i = 0; i < 8 - photos.length; i++) {
             formData.append('profileImg', photo7[i])
         }
         formData.append('setPermissivecategory', Permissivecategory)
-        formData.append('fcategory', fcategory)
         formData.append('categoryselect2', secondarycategory)
         formData.append('titel', titel)
+        formData.append('brand', brand)
         formData.append('description', description)
         formData.append('saleprice', saleprice)
         formData.append('regularprice', regularprice)
         formData.append('photodelte', JSON.stringify(photodelte))
+        formData.append('fcategory', fcategory)
         formData.append('photos', JSON.stringify(photos))
         formData.append('fSizeOptions2', JSON.stringify(fSizeOptions2))
-        axios.put(`http://localhost:3001/update/${id}`, formData, {
+        axios.put(`http://localhost:3001/update/${id}/${accessToken}`, formData, {
         }).then((res: any) => {
             if (res.data.message === 'good') {
                 Swal.fire({
@@ -137,21 +158,31 @@ function Editeproduct() {
             }
         }).catch((err: any) => {
             console.log(err);
-            console.log(err.response.data.error);
+            // console.log(err.response.data.error);
 
-            const term = err.response.data
-            const regex = /Only .png, .jpg and .jpeg format allowed!/g
-            const regex2 = /File too large/g
-            const isExist = term.match(regex)
-            const isExist2 = term.match(regex2)
-            if (isExist) console.log("Image must be one of type jpg...");
-            if (isExist2) console.log("File too large");
+            // const term = err.response.data
+            // const regex = /Only .png, .jpg and .jpeg format allowed!/g
+            // const regex2 = /File too large/g
+            // const isExist = term.match(regex)
+            // const isExist2 = term.match(regex2)
+            // if (isExist) console.log("Image must be one of type jpg...");
+            // if (isExist2) console.log("File too large");
 
 
 
         })
     }
-
+    useEffect(() => {
+        if (Permissivecategory === 'pants') {
+            setopsions(categorys2)
+        }
+        if (Permissivecategory === 'Shirts') {
+            setopsions(categorys3)
+        }
+        if (Permissivecategory === 'shoes') {
+            setopsions(categorys4)
+        }
+    }, [Permissivecategory])
     return (
         <div className={css.myfdiv}>
             <h3>הוספת מוצר:</h3>
@@ -169,7 +200,7 @@ function Editeproduct() {
                 <br />
                 <Select
                     value={{ value: secondarycategory, label: secondarycategory }}
-                    options={categorys2}
+                    options={opsions}
                     onChange={(e: any) => {
                         console.log(e);
                         setsecondarycategory(e.value)

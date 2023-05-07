@@ -8,17 +8,18 @@ const Myslider = () => {
     const settings = {
         dots: true,
         infinite: true,
-        slidesToShow: 5,
+        slidesToShow: 7,
         slidesToScroll: 1,
         autoplay: true,
         speed: 2000,
         autoplaySpeed: 100,
         cssEase: "linear",
         responsive: [
+
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 4,
+                    slidesToShow: 5,
                 }
             },
             {
@@ -31,13 +32,13 @@ const Myslider = () => {
             {
                 breakpoint: 450,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                 }
             },
             {
-                breakpoint: 350,
+                breakpoint: 380,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 2,
                 }
             }
         ]
@@ -59,6 +60,9 @@ const Myslider = () => {
             </div>
             <div>
                 <img className={css.img} src={`https://logos-world.net/wp-content/uploads/2020/04/Ralph-Lauren-sign.png`} alt={`product-`} />
+            </div>
+            <div>
+                <img className={css.img} src={`https://cdn.logojoy.com/wp-content/uploads/2018/05/30143419/95.png`} alt={`product-`} />
             </div>
             <div>
                 <img className={css.img} src={`https://cdn.logojoy.com/wp-content/uploads/2018/05/30143419/95.png`} alt={`product-`} />

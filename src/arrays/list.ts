@@ -29,18 +29,30 @@ export const categorys: optionstype[] = [
 
 ];
 export const categorys2: optionstype[] = [
-    { value: 'Shirts', label: 'Shirts' },
-    { value: 'pants', label: 'pants' },
-    { value: 'shoes', label: 'shoes' },
+    { value: 'מכנסיים קצרים', label: 'מכנסיים קצרים' },
+    { value: 'מכנסיים ארוכים', label: 'מכנסיים ארוכים' },
+    { value: 'מכנסיים נילון', label: 'מכנסיים נילון' },
+
+];
+export const categorys3: optionstype[] = [
+    { value: 'חולצות קצרים', label: 'חולצות קצרים' },
+    { value: 'חולצות ארוכים', label: 'חולצות ארוכים' },
+    { value: 'חולצות נילון', label: 'חולצות נילון' },
+
+];
+export const categorys4: optionstype[] = [
+    { value: 'נעלי ספורט', label: 'נעלי ספורט' },
+    { value: 'נעלי עבודה', label: 'נעלי עבודה' },
+    { value: 'נעלי יום', label: 'נעלי יום' },
 
 ];
 export const colourOptions: optionstype[] = [
-    { value: 'red', label: 'Red' },
-    { value: 'blue', label: 'Blue' },
-    { value: 'green', label: 'Green' },
-    { value: 'yellow', label: 'Yellow' },
+    { value: 'Red', label: 'Red' },
+    { value: 'Blue', label: 'Blue' },
+    { value: 'Green', label: 'Green' },
+    { value: 'Yellow', label: 'Yellow' },
     { value: 'Orange', label: 'Orange' },
-    { value: 'purple', label: 'Purple' },
+    { value: 'Purple', label: 'Purple' },
     { value: 'Pink', label: 'Pink' },
     { value: 'Brown', label: 'Brown' },
     { value: 'Black', label: 'Black' },
@@ -49,7 +61,6 @@ export const colourOptions: optionstype[] = [
     { value: 'Gold', label: 'Gold' },
     { value: 'Magenta', label: 'Magenta' },
     { value: 'Turquoise', label: 'Turquoise' },
-
 ];
 export const SizeOptions: optionstype[] = [
     { value: 'XS', label: 'XSmall' },

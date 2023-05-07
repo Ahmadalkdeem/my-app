@@ -12,6 +12,8 @@ import MyCard from '../../components/card/Card';
 import './style.css'
 import Swal from 'sweetalert2';
 import { Container, Row, Col } from 'react-bootstrap';
+import Spiner from '../../components/Spiner/Spiner';
+import { Helmet } from "react-helmet";
 
 let fitem = {
     category: "Shirts",
@@ -28,6 +30,7 @@ let fitem = {
 function Page() {
     let { id, scategory, fcategory } = useParams()
     const [Theitem, setTheitem] = useState<any>(fitem)
+    const [arr, setarr] = useState<any>([])
     const Navigate = useNavigate()
     let onDispatch = useAppDispatch()
 
@@ -38,19 +41,28 @@ function Page() {
 
 
     const getData = async (e: { category: string, id: string }) => {
-        const { data } = await axios.get(`http://localhost:3001/uplode/findOne/${e.category}/${e.id}`);
-        setTheitem(data)
-        setState(data.stock[0].size)
-        setcolor(data.stock[0].colors[0].color)
-        console.log(data);
+        await axios.get(`http://localhost:3001/uplode/findOne/${e.category}/${e.id}`).then((e) => {
+            console.log(e);
+
+            setTheitem(e.data)
+            setState(e.data.stock[0].size)
+            setcolor(e.data.stock[0].colors[0].color)
+        }).catch((e) => {
+            console.log(e);
+            Navigate('/')
+        });
+
 
     };
     const item = () => {
         if (fcategory === 'shoes') {
             let x = users3.find((e: any) => e._id === id)
             if (x === undefined) {
+                console.log('aa');
+
                 getData({ category: 'shoes', id: `${id}` })
             } else {
+                console.log('bb');
                 setTheitem(x)
                 setState(x.stock[0].size)
                 setcolor(x.stock[0].colors[0].color)
@@ -60,8 +72,12 @@ function Page() {
             let x = users.find((e: any) => e._id === id)
 
             if (x === undefined) {
+                console.log('aa');
+
                 getData({ category: 'Shirts', id: `${id}` })
             } else {
+                console.log('bb');
+
                 setTheitem(x)
                 setState(x.stock[0].size)
                 setcolor(x.stock[0].colors[0].color)
@@ -71,8 +87,12 @@ function Page() {
             let x = users2.find((e: any) => e._id === id)
 
             if (x === undefined) {
+                console.log('aa');
+
                 getData({ category: 'pants', id: `${id}` })
             } else {
+                console.log('bb');
+
                 setTheitem(x)
                 setState(x.stock[0].size)
                 setcolor(x.stock[0].colors[0].color)
@@ -80,13 +100,8 @@ function Page() {
         }
     }
 
-    useEffect(() => {
-        item()
-        window.scrollTo(0, 0)
 
-    }, [id, scategory, fcategory]);
-
-    let x = Theitem.stock
+    let x: any = Theitem.stock
     const [state, setState] = useState(Theitem.stock[0].size)
     const [color, setcolor] = useState(`${Theitem.stock[0].colors[0].color}`)
     let zz = Theitem.stock.find((xx: any) => xx.size === state)
@@ -97,9 +112,26 @@ function Page() {
 
     const [toggler, setToggler] = useState(false);
     const [show, setshow] = useState('');
+    useEffect(() => {
+        item()
+        setState2(1)
+        window.scrollTo(0, 0)
+        setarr([...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-6))
+
+    }, [id, scategory, fcategory]);
+    useEffect(() => {
+        if (arr[0] === undefined || arr.length < 6) {
+            setarr([...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-6))
+        }
+    }, [users, users2, users3]);
     return (
         <>
-            {Theitem === fitem ? '' : <>
+            <Helmet>
+                <title>Your new meta title</title>
+                <meta name="description" content="Web site created using create-react-app" />
+                <meta name="keywords" content="HTML, CSS, JavaScript"></meta>
+            </Helmet>
+            {Theitem === fitem ? <Spiner /> : <>
                 <div className={css.div}>
                     <FsLightbox
                         toggler={toggler}
@@ -175,7 +207,7 @@ function Page() {
                             </div>
                         </div>
                         <button className={css.Btn} onClick={() => {
-                            onDispatch(addCard([{ id: `${cart.length}`, ...Theitem, ...order }]))
+                            onDispatch(addCard({ id: `${cart.length}`, ...Theitem, ...order }))
                             Swal.fire({
                                 icon: 'success',
                                 title: 'המוצר הוסף בהצלחה',
@@ -190,7 +222,7 @@ function Page() {
             <Container className={`Container ${css.Container}`} fluid>
                 <Row xs={2} sm={3} lg={4} xxl={5}>
                     {
-                        [...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-6).map((product: any, index: number) => (
+                        arr.map((product: any, index: number) => (
                             <Col key={index} className="mt-2 p-1">
                                 <MyCard key={index}
                                     {...product} />

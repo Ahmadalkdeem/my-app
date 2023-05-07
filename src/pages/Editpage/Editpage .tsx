@@ -6,13 +6,16 @@ import css from './css.module.scss'
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineUpload } from "react-icons/ai";
 import { optionstype } from '../../@types/Mytypes';
-import { SizeOptions, brands, SizeOptions2, stylelableOption, categorys2, categorys, colourOptions, } from '../../arrays/list'
+import { SizeOptions, brands, SizeOptions2, categorys3, categorys4, stylelableOption, categorys2, categorys, colourOptions, } from '../../arrays/list'
+import { useAppSelector } from '../../app/hooks';
 import Swal from 'sweetalert2';
+import { productname, imgfile } from '../../validators/validators';
 function Editpage() {
     let Navigate = useNavigate()
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+    const [opsions, setopsions] = useState<any>([])
     const [photo7, setphoto7] = useState<any>([])
     const [description, setdescription] = useState('')
     const [titel, settitel] = useState('')
@@ -23,7 +26,19 @@ function Editpage() {
     const [regularprice, setregularprice] = useState('')
     const [fcolourOptions, setfcolourOptions] = useState<optionstype[]>([])
     const [fSizeOptions2, setSizeOptions2] = useState<any>([])
+    const { accessToken } = useAppSelector((s) => s.user);
 
+    useEffect(() => {
+        if (Permissivecategory === 'pants') {
+            setopsions(categorys2)
+        }
+        if (Permissivecategory === 'Shirts') {
+            setopsions(categorys3)
+        }
+        if (Permissivecategory === 'shoes') {
+            setopsions(categorys4)
+        }
+    }, [Permissivecategory])
     function poo(eq: any) {
         eq.forEach((ee: any) => {
             let zxc = fSizeOptions2.find((e: any) => e.size === ee.value)
@@ -42,10 +57,24 @@ function Editpage() {
 
 
     const handleSaveStudentClicked = async () => {
+        if (description.length < 1500) console.log(true);
+        else { console.log(false); }
+        if (titel.length < 100) console.log(true);
+        else { console.log(false); }
+        if (description.length > 0 && titel.length > 0 && brand.length > 0 && Permissivecategory.length > 0 && secondarycategory.length > 0 && saleprice.length > 0 && regularprice.length > 0 && fSizeOptions2.length > 0 && photo7.length > 0) {
+            handleSaveStudentClicked2()
+        }
+        else {
+            console.log(false, false);
+
+        }
+    }
+    const handleSaveStudentClicked2 = async () => {
         const formData = new FormData()
         for (let i = 0; i < 8; i++) {
             formData.append('profileImg', photo7[i])
         }
+
         formData.append('setPermissivecategory', Permissivecategory)
         formData.append('categoryselect2', secondarycategory)
         formData.append('titel', titel)
@@ -54,7 +83,7 @@ function Editpage() {
         formData.append('saleprice', saleprice)
         formData.append('regularprice', regularprice)
         formData.append('fSizeOptions2', JSON.stringify(fSizeOptions2))
-        axios.post("http://localhost:3001/uplode/user-profile", formData, {
+        axios.post(`http://localhost:3001/uplode/user-profile/${accessToken}`, formData, {
         }).then((res: any) => {
             console.log(res.data)
             if (res.data.message === 'good') {
@@ -74,13 +103,13 @@ function Editpage() {
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
-            const term = err.response.data
-            const regex = /Only .png, .jpg and .jpeg format allowed!/g
-            const regex2 = /File too large/g
-            const isExist = term.match(regex)
-            const isExist2 = term.match(regex2)
-            if (isExist) console.log("Image must be one of type jpg...");
-            if (isExist2) console.log("File too large");
+            // const term = err.response.data
+            // const regex = /Only .png, .jpg and .jpeg format allowed!/g
+            // const regex2 = /File too large/g
+            // const isExist = term.match(regex)
+            // const isExist2 = term.match(regex2)
+            // if (isExist) console.log("Image must be one of type jpg...");
+            // if (isExist2) console.log("File too large");
         })
     }
 
@@ -100,7 +129,7 @@ function Editpage() {
                 />
                 <br />
                 <Select
-                    options={categorys2}
+                    options={opsions}
                     onChange={(e: any) => {
                         console.log(e);
                         setsecondarycategory(e.value)
@@ -129,23 +158,17 @@ function Editpage() {
 
                     if (e.target.value < 0) { }
                     else if (e.target.value[0] == 0) { }
-                    else if (e.target.value.length < 4) {
+                    else if (e.target.value.length < 7) {
                         setsaleprice(e.target.value)
                     }
 
                 }} className={css.Myinput2} type="number" id='titel' />
                 <br />
                 <input value={regularprice} placeholder='מחיר הרגיל' onChange={(e: any) => {
-                    if (e.target.value < 0) {
-                    }
-                    else if (e.target.value[0] == 0) {
-
-
-                    }
-                    else if (e.target.value.length < 4) {
+                    if (e.target.value < 0) { }
+                    else if (e.target.value[0] == 0) { }
+                    else if (e.target.value.length < 7) {
                         setregularprice(e.target.value)
-                        console.log(e.target.value[0]);
-
                     }
                 }} className={css.Myinput2} type="number" id='titel' />
                 <br />
@@ -215,7 +238,9 @@ function Editpage() {
                 <AiOutlineUpload size={50} />
                 <h5>תבחר תמונות</h5>
             </label>
-            <input id='files' onChange={(e: any) => { setphoto7(e.target.files); }} type="file" accept=".jpg, .jpeg, .png, .svg, .gif" name="file" multiple className={css.Myinput} />
+            <input id='files' onChange={(e: any) => {
+                setphoto7(e.target.files); console.log(e.target.files[0]);
+            }} type="file" accept=".jpg, .jpeg, .png, .svg, .gif" name="file" multiple className={css.Myinput} />
             <br />
             <button className={css.mybtn} onClick={handleSaveStudentClicked}>uplode</button>
         </div>

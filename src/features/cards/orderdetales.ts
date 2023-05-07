@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
     loading4: false,
@@ -6,35 +6,23 @@ const initialState: any = {
     users4: [],
 };
 
-export const ordersdetalies = createAsyncThunk<any[]>("orders/fetchUsers2", () =>
-    fetch(`http://localhost:3001/carts/getorders`).then((res) => res.json())
-);
-
 const orders = createSlice({
     name: "orders",
     initialState,
     reducers: {
         addItem2: (state, action) => {
-            state.users2 = [...state.users2, ...action.payload];
-        }
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(ordersdetalies.pending, (state, action) => {
-                state.loading4 = true
-                state.error4 = ''
-            })
-            .addCase(ordersdetalies.fulfilled, (state, action) => {
-                state.loading4 = false
-                state.users4 = [...action.payload]
+            let arr: any = []
+            action.payload.forEach((element: any) => {
+                const index = state.users4.findIndex((c: any) => c._id === element._id);
+                if (index === -1) {
+                    arr.push(element)
+                }
+            });
 
-            })
-            .addCase(ordersdetalies.rejected, (state, action) => {
-                state.loading4 = false
-                state.users4 = []
-                state.error4 = action.error.message ?? 'Something went wrong'
-            })
-    },
+
+            state.users4 = [...state.users4, ...arr];
+        }
+    }
 });
 // also exported fetchUsers at the top
 export const { addItem2 } = orders.actions;

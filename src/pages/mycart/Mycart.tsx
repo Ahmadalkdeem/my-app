@@ -11,6 +11,9 @@ import {
     MDBRow,
     MDBTypography,
 } from "mdb-react-ui-kit";
+import { Helmet } from "react-helmet";
+
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -18,10 +21,14 @@ import Row from 'react-bootstrap/Row';
 import { valMail, fullNameRegex, addressRegex, cityRegex, isZipRegex } from '../../validators/validators';
 import css from './css.module.scss'
 import Cartitem from './Cartitem';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+//deleteArr
+import { deleteArr } from '../../features/cards/mycart';
 const Mycart = () => {
     let { cart } = useAppSelector((s) => s.mycart)
+
     console.log(cart);
+    let Dispatch = useAppDispatch()
 
     let pricecart = 0
     cart.map((e: any) => {
@@ -47,22 +54,42 @@ const Mycart = () => {
         if (addressRegex.test(Address) === true) seterrAddress(''); else seterrAddress('הכתובת לא תקינה');
         if (cityRegex.test(City) === true) seterrCity(''); else seterrCity('שם העיר לא תקין');
         if (isZipRegex.test(Zip) === true) seterrZip(''); else seterrZip('המיקוד לא תקין');
-        if (fullNameRegex.test(fullname) && valMail.test(Email) && addressRegex.test(Address) && cityRegex.test(City) && isZipRegex.test(Zip) && fullNameRegex.test(fullname)) {
+        if (fullNameRegex.test(fullname) && valMail.test(Email) && addressRegex.test(Address) && cityRegex.test(City) && isZipRegex.test(Zip)) {
             if (cart[0] === undefined || null) {
                 console.log('aa');
 
             }
             else {
                 console.log('bb');
-                let Order = { fullname: fullname, Email: Email, Address: Address, Address2: Address2, City: City, Zip: Zip, cart: JSON.stringify(cart) }
+                let cart2: any[] = []
+                cart.map((e: any) => {
+                    let item = {
+                        src: e.src[0], brand: e.brand, category: e.category, category2: e.category2, color: e.color, name: e.name, quantity: e.quantity, sizeselect: e.sizeselect, _id: e._id
+                    }
+                    cart2.push(item)
+                })
+                let Order = { fullname: fullname, Email: Email, Address: Address, Address2: Address2, City: City, Zip: Zip, pricecart: pricecart, cart: JSON.stringify(cart2) }
+                console.log(JSON.stringify(Order.cart));
 
 
                 axios.post(`http://localhost:3001/carts/neworder`, {
                     ...Order
                 }).then((response) => {
-
-
+                    setfullname('')
+                    setEmail('')
+                    setAddress('')
+                    setAddress2('')
+                    setCity('')
+                    setZip('')
+                    Dispatch(deleteArr('aaa'))
+                    Swal.fire({
+                        icon: 'success',
+                        title: ' ההזמנה בוצעה בהצלחה',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }).catch((err: any) => {
+                    console.log(err);
 
                 })
             }
@@ -70,6 +97,11 @@ const Mycart = () => {
     }
     return (
         <>
+            <Helmet>
+                <title>סל קניות חכם ופשוט לקניות מהירות | חנות האופנה המובילה באינטרנט</title>
+                <meta name="description" content="קנו בקלות ובמהירות עם סל הקניות החכם שלנו. צרו את רשימת הקניות שלכם וקבלו משלוח חינם בקנייה מעל 200 ש ח. הזמינו עכשיו!" />
+                <meta name="keywords" content=" סל קניות, קניות מהירות, משלוח חינם, אופנה, חנות, אינטרנט, קניות." />
+            </Helmet>
             <h1 className={css.h1}>סל קניות</h1>
             <section className="h-100 w-100 gradient-custom">
                 <MDBContainer className="py-1 h-100">

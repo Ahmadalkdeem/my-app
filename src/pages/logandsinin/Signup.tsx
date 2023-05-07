@@ -5,6 +5,7 @@ import { valMail, valpassword, valusername } from '../../validators/validators';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { updatedetalise } from '../../features/user/user';
+import { Helmet } from "react-helmet";
 
 const Signup = () => {
     useEffect(() => {
@@ -49,7 +50,13 @@ const Signup = () => {
 
 
     return (
-        <><h5 className={css.h5}>הרשמה :</h5>
+        <>
+            <Helmet>
+                <title>התחברו לחשבון שלכם | חנות האופנה המובילה באינטרנט</title>
+                <meta name="description" content=" התחברו לחשבון שלכם ותוכלו לצפות בהזמנות, לעקוב אחרי המשלוחים שלכם ולנהל את פרטי החשבון שלכם. כנסו עכשיו!" />
+                <meta name="keywords" content="התחברות, חשבון, משלוחים, פרטים, חנות, אינטרנט, קניות" />
+            </Helmet>
+            <h5 className={css.h5}>הרשמה :</h5>
             <form className={`d-flex flex-column justify-content-center align-items-center p-2 ${css.form}`} action="">
                 <label className={css.lable} htmlFor="username">שם משתמש:</label>
                 <input onChange={(e) => {

@@ -20,7 +20,7 @@ const Cartitem = (props: any) => {
             <MDBCard className={`mb-2 ${css.card}`}>
                 <MDBCardBody>
                     <MDBRow>
-                        <MDBCol lg="3" md="12" className="mb-4 mb-lg-0">
+                        <MDBCol lg="3" md="12" className="mb-1 mb-lg-0">
                             <MDBRipple rippleTag="div" rippleColor="light"
                                 className="bg-image rounded hover-zoom hover-overlay">
                                 <img
@@ -34,9 +34,9 @@ const Cartitem = (props: any) => {
                             </MDBRipple>
                         </MDBCol>
 
-                        <MDBCol lg="5" md="6" className=" mb-4 mb-lg-0">
+                        <MDBCol lg="5" md="6" className=" mb-2 mb-lg-0">
                             <p>
-                                <strong>Red hoodie</strong>
+                                <strong>{props.name}</strong>
                             </p>
                             <p>Color: {props.color}</p>
                             <p>Size: {props.sizeselect}</p>
@@ -44,8 +44,8 @@ const Cartitem = (props: any) => {
                                 Dispatch(deleteCard(props.id))
                             }} size={34} className={css.icon} />
                         </MDBCol>
-                        <MDBCol lg="4" md="6" className="mb-4 mb-lg-0">
-                            <div className="d-flex justify-content-center mb-4" style={{ maxWidth: "300px" }}>
+                        <MDBCol lg="4" md="6" className="mb-lg-0">
+                            <div className="d-flex justify-content-center mb-2" style={{ maxWidth: "300px" }}>
                                 <div className={css.sizes}>
                                     <button onClick={() => {
                                         if (props.quantity === 10) {

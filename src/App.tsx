@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import MyNavbar from './components/Navbar2/Navbar/Navbar';
+import MyNavbar2 from './components/navbar/Navbar';
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 import Mycart from './pages/mycart/Mycart';
-import Cardlist from './pages/cards/Cardlist';
+import Cardlist from './pages/Homepage/Cardlist';
 import Page from './pages/pagecard/Page';
 import Editpage from './pages/Editpage/Editpage ';
 import Bootstrapform from './pages/logandsinin/Bootstrapform';
@@ -23,10 +24,12 @@ import Orderdetales from './pages/orderdetales/Orderdetales';
 import Login from './pages/logandsinin/Login';
 import Signup from './pages/logandsinin/Signup';
 import { updatedetalise } from './features/user/user';
+import OffcanvasExample from './components/navbar/Navbar';
+import Buttom from './components/buttom/Buttom';
+import Notfoud from './components/404/Notfoud';
+import { Data } from './pages/datadetsles/Data';
 function App() {
-
   let Dispatch = useAppDispatch()
-
   useEffect(() => {
     const myData: any = localStorage.getItem("userdetalis");
 
@@ -53,6 +56,7 @@ function App() {
   }, []);
   return (
     <>
+      <MyNavbar2 />
       <MyNavbar />
 
       <Routes >
@@ -69,12 +73,16 @@ function App() {
         <Route path='/pants' element={<Pants />} />
         <Route path='/:fcategory/:scategory/:id' element={<Page />} />
         {roles[0] === 'admin' && <Route path='/addproduct' element={<Editpage />} />}
+        {roles[0] === 'admin' && <Route path='/data' element={<Data />} />}
         {roles[0] === 'admin' && <Route path='/orders' element={<Order />}>
           <Route path='detales/:id2' element={<Orderdetales />} />
         </Route>}
         {roles[0] === 'admin' && <Route path='/Editeproduct/:category/:id' element={<Editeproduct />} />}
 
+        <Route path='*' element={<Notfoud />} />
       </Routes>
+      <Buttom />
+
       <Footer />
     </>
   );

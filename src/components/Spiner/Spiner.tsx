@@ -1,17 +1,22 @@
 import React from 'react'
-import { Dna } from 'react-loader-spinner'
-
+import { Oval } from 'react-loader-spinner'
+import css from './css.module.scss'
 const Spiner = () => {
     return (
-        <div className='d-flex justify-content-center align-items-center p-5 mt-5'>
+        <div className={css.div}>
 
-            <Dna
-                visible={true}
-                height="80"
-                width="80"
-                ariaLabel="dna-loading"
+            <Oval
+                height={80}
+                width={80}
+                color="#4fa94d"
                 wrapperStyle={{}}
-                wrapperClass="dna-wrapper"
+                wrapperClass=""
+                visible={true}
+                ariaLabel='oval-loading'
+                secondaryColor="#4fa94d"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+
             />
         </div>
     )

@@ -4,30 +4,28 @@ import css from './css.module.scss'
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import { useNavigate, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { ordersdetalies } from '../../features/cards/orderdetales';
 import Spiner from '../../components/Spiner/Spiner'
-
+import { addItem2 } from '../../features/cards/orderdetales';
 const Order = () => {
     let Dispatch = useAppDispatch()
     const { loading4, users4, error4 } = useAppSelector((s) => s.orders);
+    const { accessToken } = useAppSelector((s) => s.user);
     const navigate = useNavigate();
-    console.log(users4);
-
     useEffect(() => {
         window.scrollTo(0, 0)
-        if (users4[0] === undefined) {
-            Dispatch(ordersdetalies())
-        }
+        axios.get(`http://localhost:3001/carts/getorders/${accessToken}`, {
+        }).then((response) => {
+            Dispatch(addItem2(response.data))
+        }).catch((err: any) => {
+            console.log(err);
+            console.log(err.response.data.error);
+        })
     }, []);
 
     return (
         <>
-            <br />
-            <br />
-            <br />
             <Outlet />
-            {loading4 === true && <Spiner />}
-            {users4 === '' ? <Spiner /> :
+            {users4.length === 0 ? <Spiner /> :
                 <div className={css.Div}>
 
                     <MDBTable className={css.table}>

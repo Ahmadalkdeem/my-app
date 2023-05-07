@@ -25,14 +25,18 @@ function MyCard(props: Cardtype) {
             confirmButtonText: 'Save',
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:3001/uplode/delete/${props.category}/${props._id}`, {
+                axios.delete(`http://localhost:3001/uplode/delete/${props.category}/${props._id}/${accessToken}`, {
                 }).then((response) => {
-                    console.log(response.data);
                     if (response.data.Message === 'susces') {
                         if (props.category === 'Shirts') Dispatch(delteItem(props._id))
                         if (props.category === 'pants') Dispatch(delteItem2(props._id))
                         if (props.category === 'shoes') Dispatch(delteItem3(props._id))
-                        Swal.fire('delete!', '', 'success')
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'המוצר נמחק בהצלחה',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
 
                     }
 
@@ -77,16 +81,12 @@ function MyCard(props: Cardtype) {
             </Carousel>
 
 
-            <Card.Body className={css.bodycard}>
-                <Card.Title onClick={() => {
-                    navigate(`/${props.category}/${props.category2}/${props._id}`);
-                }} className={css.titel}>{props.name}</Card.Title>
-                <Card.Title onClick={() => {
-                    navigate(`/${props.category}/${props.category2}/${props._id}`);
-                }} className={css.brand}>{props.brand}</Card.Title>
-                <Card.Text onClick={() => {
-                    navigate(`/${props.category}/${props.category2}/${props._id}`);
-                }} className={css.P}>
+            <Card.Body onClick={() => {
+                navigate(`/${props.category}/${props.category2}/${props._id}`);
+            }} className={css.bodycard}>
+                <Card.Title className={css.titel}>{props.name}</Card.Title>
+                <Card.Title className={css.brand}>{props.brand}</Card.Title>
+                <Card.Text className={css.P}>
                     <span className='d-flex justify-content-center align-items-center flex-wrap g-2'>
 
                         <span className={css.span}>{props.price2}₪</span>

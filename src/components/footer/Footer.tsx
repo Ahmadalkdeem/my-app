@@ -56,7 +56,7 @@ function Footer() {
 
 
 
-                            <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0 mb-4'>
+                            <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0'>
                                 <h6 className={`text-uppercase fw-bold mb-4 text-center ${css.color}`} >Contact</h6>
                                 <p className={`text-center ${css.color}`}>
                                     New York, NY 10012, US
@@ -74,9 +74,9 @@ function Footer() {
                     </MDBContainer>
                 </section>
 
-                <div className={`text-center p-2 ${css.color}`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+                <div className={`text-center p-2 ${css.color} ${css.size}`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
                     © 2021 Copyright:
-                    <a className={`text-reset fw-bold ${css.color}`} href='https://mdbootstrap.com/'>
+                    <a className={`text-reset fw-bold ${css.color} ${css.size}`} href='https://mdbootstrap.com/'>
                         MDBootstrap.com
                     </a>
                 </div>

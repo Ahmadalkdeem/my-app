@@ -4,6 +4,8 @@ import axios from 'axios'
 import Cardlist from '../../components/cardlist2/Cardlist';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { addItem3 } from '../../features/cards/cardshose';
+import Spiner from '../../components/Spiner/Spiner';
+import { Helmet } from "react-helmet";
 
 function Shose() {
     const [end, setend] = useState<any>(true);
@@ -42,17 +44,16 @@ function Shose() {
     }
 
     return (
-        <div>
-            <Cardlist h1='נעליים גבריים' users={users3} />
-            <button onClick={() => {
-                if (end === true) {
-                    console.log('aaa');
-
-                    getData()
-                }
-
-            }}>ahmad</button>
-        </div>
+        <>
+            <Helmet>
+                <title>מבחר נעליים לגברים | חנות האופנה המובילה באינטרנט</title>
+                <meta name="description" content="גלו את המבחר המדהים שלנו של נעליים לגברים , כולל סניקרס, נעלי עקב, נעלי ספורט ועוד. הזמינו עכשיו ותהיו בטופ!" />
+                <meta name="keywords" content="נעליים, סניקרס, עקב, ספורט, אופנה, חנות, אינטרנט, קניות" />
+            </Helmet>
+            {loading3 && <Spiner />}
+            {users3.length > 0 && <Cardlist h1='נעליים גבריים' users={users3} />}
+            {error3 && <div>{error3}</div>}
+        </>
     )
 }
 

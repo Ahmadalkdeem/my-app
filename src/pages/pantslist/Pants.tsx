@@ -4,7 +4,8 @@ import axios from 'axios'
 import Cardlist from '../../components/cardlist2/Cardlist';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { addItem2 } from '../../features/cards/cardPants';
-// import { fetchUsers2 } from '../../features/cards/cardPants';
+import Spiner from '../../components/Spiner/Spiner';
+import { Helmet } from "react-helmet";
 function Shose() {
     const [end, setend] = useState<any>(true);
     const { loading2, users2, error2 } = useAppSelector((s) => s.cardPants);
@@ -43,18 +44,19 @@ function Shose() {
     }
 
     return (
-        <div>
+        <>
+            <Helmet>
+                <title> מגוון רחב של מכנסיים לגברים | חנות האופנה המובילה באינטרנט
+                </title>
+                <meta name="description" content="גלו את המגוון הרחב שלנו של מכנסיים לגברים ונשים, כולל מכנסי ג'ינס, טייץ, שורטים ועוד. הזמינו עכשיו וקבלו משלוח חינם!
+" />
+                <meta name="keywords" content="מכנסיים, ג'ינס, טייץ, שורטים, אופנה, חנות, אינטרנט, קניות" />
+            </Helmet>
+            {loading2 && <Spiner />}
+            {users2.length > 0 && <Cardlist h1='מכנסיים גבריים' users={users2} />}
+            {error2 && <div>{error2}</div>}
 
-            <Cardlist h1='מכנסיים גבריים' users={users2} />
-            <button onClick={() => {
-                if (end === true) {
-                    console.log('aaa');
-
-                    getData()
-                }
-
-            }}>ahmad</button>
-        </div>
+        </>
     )
 }
 

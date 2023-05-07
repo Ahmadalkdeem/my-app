@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { AiFillBackward, AiFillForward } from "react-icons/ai";
 import css from './css.module.scss'
 import './mycss.css'
+import img from './Jeffries & Madison.png'
 const MYCarousel = () => {
     return (
         <Carousel interval={null} indicators={false} controls={false} nextIcon={<AiFillForward size={50} />} prevIcon={<AiFillBackward size={50} />} dir='ltr' className={`w-100 d-flex ${css.corsla}`}  >
@@ -10,7 +11,7 @@ const MYCarousel = () => {
             <Carousel.Item>
                 <img
                     className={css.Imgcorsla}
-                    src={`https://media.istockphoto.com/id/1255047767/photo/colorful-polo-t-shirt-stack-on-shelf-in-large-department-store-shop-copy-space-on-white-sign.jpg?b=1&s=170667a&w=0&k=20&c=aj-HtwlQGdA_Qzb-W3SkKbhOvRk1Z3WNOmaM1WXtJMk=`}
+                    src={img}
                     alt="First slide"
                 />
                 <Carousel.Caption className={css.Caption}>

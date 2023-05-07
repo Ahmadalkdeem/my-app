@@ -6,27 +6,34 @@ import css from './css.module.scss'
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import Spiner from '../../components/Spiner/Spiner'
+
 const Orderdetales = () => {
     let { id2 } = useParams()
-    const [users, setusers] = useState(useAppSelector((s) => s.orders.users4.find((e: any) => e._id === id2)))
+    const { users4 } = useAppSelector((s) => s.orders)
+    const [users, setusers] = useState<any>()
+    console.log(users);
+
     let Dispatch = useAppDispatch()
     // const { loading4, users4, error4 } = useAppSelector((s) => s.orders);
     async function getorder() {
 
-        if (users === undefined || users === null) {
-            axios.get(`http://localhost:3001/carts/getoneorder/${id2}`, {
-            }).then((response) => {
 
-                setusers(response.data[0])
-            }).catch((err: any) => {
-                console.log(err);
-                console.log(err.response.data.error);
-            })
-        }
+        axios.get(`http://localhost:3001/carts/getoneorder/${id2}`, {
+        }).then((response) => {
+            console.log(response);
+
+            setusers(response.data)
+        }).catch((err: any) => {
+            console.log(err);
+            console.log(err.response.data.error);
+        })
+
     }
     useEffect(() => {
-        getorder()
-    }, []);
+        let order = users4.find((e: any) => e._id === id2)
+        if (order === undefined) getorder();
+        else { setusers(order) }
+    }, [id2]);
     return (
         <>
             {users === undefined || null ? <Spiner /> :
@@ -38,18 +45,22 @@ const Orderdetales = () => {
                                 <tr>
                                     <th scope='col'>#</th>
                                     <th scope='col'>orderId</th>
-                                    <th scope='col'>userid</th>
                                     <th scope='col'>username</th>
                                     <th scope='col'>email</th>
+                                    <th scope='col'>City</th>
+                                    <th scope='col'>Address</th>
+                                    <th scope='col'>Address2</th>
                                 </tr>
                             </MDBTableHead>
                             <MDBTableBody>
                                 <tr >
                                     <th scope='row'>{1}</th>
                                     <td> {users._id}</td>
-                                    <td> {users.userid[0]}</td>
-                                    <td> {users.username[0]}</td>
-                                    <td> {users.email[0]}</td>
+                                    <td> {users.fullname}</td>
+                                    <td> {users.Email}</td>
+                                    <td> {users.City}</td>
+                                    <td> {users.Address}</td>
+                                    <td> {users.Address2}</td>
                                 </tr>
 
                             </MDBTableBody>
@@ -59,7 +70,7 @@ const Orderdetales = () => {
                         {users.arr.map((number: any, i: number) =>
 
                             <Card key={i} style={{ width: '18rem' }}>
-                                <Card.Img className={css.Img} variant="top" src={number.src} />
+                                <Card.Img className={css.Img} variant="top" src={number.src[0]} />
                                 <Card.Body>
                                     <div>
                                         <MDBTable className={css.table}>
@@ -72,7 +83,7 @@ const Orderdetales = () => {
                                             </MDBTableHead>
                                             <MDBTableBody>
                                                 <tr >
-                                                    <td> {number.brand}</td>
+                                                    <td> {number.name}</td>
                                                     <td> {number.category2}</td>
                                                     <td> {number.color}</td>
                                                 </tr>
