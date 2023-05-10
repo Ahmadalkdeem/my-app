@@ -14,7 +14,7 @@ const userdetalis = createSlice({
     initialState,
     reducers: {
         updatedetalise: (state, action) => {
-            localStorage.setItem('userdetalis', JSON.stringify(action.payload.accessToken));
+            localStorage.setItem('userdetalis', action.payload.accessToken);
             state.accessToken = action.payload.accessToken
             state.email = action.payload.email
             state.username = action.payload.username

@@ -1,4 +1,3 @@
-// import { initialUserState, User } from "./user";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState: any = {

@@ -17,7 +17,7 @@ function Shose() {
             console.log('aa');
 
             setend(false)
-            axios.get(`http://localhost:3001/uplode/Shirtsproduct/1/${users.length}`, {
+            axios.get(`http://localhost:3001/uplode/Shirtsproduct/20/${users.length}`, {
             }).then((response) => {
                 setend(true)
                 if (response.data.length < 1) {

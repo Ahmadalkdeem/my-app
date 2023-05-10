@@ -59,6 +59,7 @@ function OffcanvasExample() {
                                     {roles[0] === 'admin' && <><NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/addproduct">הוספה מוצר</NavLink>
                                         <NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/data">ביצועים</NavLink>
                                         <NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/orders">הזמנות</NavLink>
+                                        <NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/users">משתמשים</NavLink>
                                     </>}
                                 </div>
                                 <Topnav />

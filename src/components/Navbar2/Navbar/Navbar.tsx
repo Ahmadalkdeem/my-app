@@ -56,6 +56,7 @@ function MyNavbar() {
                                     {roles[0] === 'admin' && <><NavLink onClick={closenavbar} className={css.Mylink} to="/addproduct">הוספה מוצר</NavLink>
                                         <NavLink onClick={closenavbar} className={css.Mylink} to="/data">ביצועים</NavLink>
                                         <NavLink onClick={closenavbar} className={css.Mylink} to="/orders">הזמנות</NavLink>
+                                        <NavLink onClick={closenavbar} className={css.Mylink} to="/users">משתמשים</NavLink>
                                     </>}
                                 </div>
                                 <Topnav />

@@ -64,7 +64,7 @@ const Mycart = () => {
                 let cart2: any[] = []
                 cart.map((e: any) => {
                     let item = {
-                        src: e.src[0], brand: e.brand, category: e.category, category2: e.category2, color: e.color, name: e.name, quantity: e.quantity, sizeselect: e.sizeselect, _id: e._id
+                        src: e.src[0], brand: e.brand, category: e.category, category2: e.category2, color: e.color, name: e.name, quantity: e.quantity, sizeselect: e.sizeselect
                     }
                     cart2.push(item)
                 })

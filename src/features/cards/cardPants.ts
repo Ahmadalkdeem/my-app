@@ -47,7 +47,7 @@ const cardpants = createSlice({
             .addCase(fetchUsers2.rejected, (state, action) => {
                 state.loading2 = false
                 state.users2 = []
-                state.error2 = action.error.message ?? 'Something went wrong'
+                state.error2 = 'Something went wrong'
             })
     },
 });

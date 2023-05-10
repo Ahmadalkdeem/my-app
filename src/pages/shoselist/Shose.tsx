@@ -15,7 +15,7 @@ function Shose() {
     const getData = async () => {
         if (end === true) {
             setend(false)
-            axios.get(`http://localhost:3001/uplode/shoesproduct/1/${x}`, {
+            axios.get(`http://localhost:3001/uplode/shoesproduct/20/${x}`, {
             }).then((response) => {
                 setend(true)
 

@@ -28,16 +28,25 @@ import OffcanvasExample from './components/navbar/Navbar';
 import Buttom from './components/buttom/Buttom';
 import Notfoud from './components/404/Notfoud';
 import { Data } from './pages/datadetsles/Data';
+import Users from './pages/users/Users';
+import ForgotPassword from './pages/logandsinin/ForgotPassword';
 function App() {
+  let { email, roles, username, accessToken } = useAppSelector(e => e.user)
+  console.log(email, roles, username, accessToken);
+
+
   let Dispatch = useAppDispatch()
   useEffect(() => {
     const myData: any = localStorage.getItem("userdetalis");
+    console.log(myData);
 
     if (myData === null || myData === undefined) { }
     else {
-      axios.post('http://localhost:3001/api/auth/valtoken', {
-        token: JSON.parse(myData)
+      axios.post(`http://localhost:3001/api/auth/valtoken`, {
+        token: myData
       }).then((response) => {
+        console.log(response);
+
         Dispatch(updatedetalise(response.data))
       }).catch(e => {
         console.log(e);
@@ -47,13 +56,14 @@ function App() {
   }, []);
 
 
-  let { id, email, roles, username, accessToken } = useAppSelector(e => e.user)
   useEffect(() => {
     Dispatch(fetchUsers())
     Dispatch(fetchUsers2())
     Dispatch(fetchUsers3())
 
   }, []);
+
+
   return (
     <>
       <MyNavbar2 />
@@ -65,6 +75,7 @@ function App() {
         <Route path='/connection' element={<Bootstrapform />} >
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<Signup />} />
+          {/* <Route path='ForgotPassword' element={<ForgotPassword />} /> */}
         </Route>
         <Route path='/about' element={<About />} />
         <Route path='/Mycard' element={<Mycart />} />
@@ -72,12 +83,16 @@ function App() {
         <Route path='/Shirts' element={<Shirt />} />
         <Route path='/pants' element={<Pants />} />
         <Route path='/:fcategory/:scategory/:id' element={<Page />} />
-        {roles[0] === 'admin' && <Route path='/addproduct' element={<Editpage />} />}
-        {roles[0] === 'admin' && <Route path='/data' element={<Data />} />}
-        {roles[0] === 'admin' && <Route path='/orders' element={<Order />}>
-          <Route path='detales/:id2' element={<Orderdetales />} />
-        </Route>}
-        {roles[0] === 'admin' && <Route path='/Editeproduct/:category/:id' element={<Editeproduct />} />}
+        {roles[0] === 'admin' && <>
+          <Route path='/addproduct' element={<Editpage />} />
+          <Route path='/data' element={<Data />} />
+          <Route path='/orders' element={<Order />}>
+            <Route path='detales/:id2' element={<Orderdetales />} />
+          </Route>
+          <Route path='/Editeproduct/:category/:id' element={<Editeproduct />} />
+          <Route path='/users' element={<Users />} />
+        </>
+        }
 
         <Route path='*' element={<Notfoud />} />
       </Routes>

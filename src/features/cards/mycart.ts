@@ -52,8 +52,6 @@ const cardpants = createSlice({
         },
     }
 });
-// also exported fetchUsers at the top
 export const { addCard, editCard, deleteCard, deleteArr } = cardpants.actions;
 
-//export the reducer
 export default cardpants.reducer

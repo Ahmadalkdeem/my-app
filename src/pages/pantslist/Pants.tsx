@@ -16,7 +16,7 @@ function Shose() {
     const getData = async () => {
         if (end === true) {
             setend(false)
-            axios.get(`http://localhost:3001/uplode/pantsproduct/1/${x}`, {
+            axios.get(`http://localhost:3001/uplode/pantsproduct/20/${x}`, {
             }).then((response) => {
                 setend(true)
                 if (response.data.length < 1) {
@@ -32,6 +32,8 @@ function Shose() {
 
         }
     };
+    console.log(error2);
+
     window.onscroll = () => {
         const scrollPosition = window.scrollY;
         const windowHeight = window.innerHeight;
@@ -39,7 +41,7 @@ function Shose() {
         const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
 
         if (scrollPercentage > 50) {
-            getData()
+            // getData()
         }
     }
 
