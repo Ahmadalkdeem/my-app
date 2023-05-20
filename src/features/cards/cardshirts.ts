@@ -5,10 +5,11 @@ const initialState: any = {
     loading: false,
     error: "",
     users: [],
+    findusers: [],
 };
 
 export const fetchUsers = createAsyncThunk<any[]>("user/fetchUsers", (length1: any) =>
-    fetch(`http://localhost:3001/uplode/Shirtsproduct/30/0`).then((res) => res.json())
+    fetch(`http://localhost:3001/uplode/Shirtsproduct/0`).then((res) => res.json())
 );
 
 // fetch user from api
@@ -27,9 +28,9 @@ const cardshirts = createSlice({
             state.users = [...state.users, ...arr];
         }, delteItem: (state, action) => {
             const index = state.users.findIndex((c: any) => c._id === action.payload);
-
-            //delete the card at index:
             state.users.splice(index, 1);
+        }, addfindusers: (state, action) => {
+            state.findusers = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -51,7 +52,7 @@ const cardshirts = createSlice({
     },
 });
 // also exported fetchUsers at the top
-export const { addItem, delteItem } = cardshirts.actions;
+export const { addItem, delteItem, addfindusers } = cardshirts.actions;
 
 //export the reducer
 export default cardshirts.reducer

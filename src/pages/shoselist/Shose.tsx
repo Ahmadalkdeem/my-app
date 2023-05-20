@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
-import css from './css.module.scss'
+import { useState } from 'react'
 import axios from 'axios'
-import Cardlist from '../../components/cardlist2/Cardlist';
+import Cardlist from '../../components/cardlist/Cardlist';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { addItem3 } from '../../features/cards/cardshose';
 import Spiner from '../../components/Spiner/Spiner';
@@ -15,7 +14,7 @@ function Shose() {
     const getData = async () => {
         if (end === true) {
             setend(false)
-            axios.get(`http://localhost:3001/uplode/shoesproduct/20/${x}`, {
+            axios.get(`http://localhost:3001/uplode/shoesproduct/${x}`, {
             }).then((response) => {
                 setend(true)
 

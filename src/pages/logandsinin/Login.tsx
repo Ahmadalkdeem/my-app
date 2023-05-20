@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import css from './css.module.scss'
 import axios from 'axios';
 import { valMail, valpassword } from '../../validators/validators';
@@ -71,7 +71,9 @@ const Login = () => {
                 <p className={css.P}>{errpassword === '' ? '' : errpassword}</p>
                 <input className={css.btn} type="button" value="כניסה" onClick={login} />
                 <div className={css.div2}>
-                    <Link to='/connection/ForgotPassword' className={css.BtnForgotPassword} >Forgot Password</Link>
+                    {/* <Link to='/connection/ForgotPassword' className={css.BtnForgotPassword} >שינוי סיסמה</Link>
+                    <br /> */}
+                    <Link to='/connection/Restartpassword' className={css.BtnForgotPassword} >שינוי סיסמה</Link>
                 </div>
             </form></>
     )

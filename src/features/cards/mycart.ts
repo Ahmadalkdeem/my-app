@@ -1,6 +1,5 @@
 // import { initialUserState, User } from "./user";
 import { createSlice } from "@reduxjs/toolkit";
-import { log } from "console";
 
 const initialState: any = {
     cart: []
@@ -14,13 +13,8 @@ const cardpants = createSlice({
     reducers: {
         addCard: (state, action) => {
             let x: any = ''
-            console.log('bb');
             state.cart.map((e: any, index: number) => {
-                console.log('cc', e._id, action.payload);
                 if (action.payload._id === e._id) {
-                    console.log('aa');
-                    console.log(e.quantity, action.payload.quantity, state.cart[index]);
-
                     if (action.payload.sizeselect === e.sizeselect && action.payload.color === e.color) {
                         if (e.quantity + action.payload.quantity > 10) {
                             state.cart[index].quantity = 10
@@ -37,21 +31,30 @@ const cardpants = createSlice({
             if (x === '') {
                 state.cart = [...state.cart, action.payload]
             }
+            localStorage.setItem('cart', JSON.stringify(state.cart));
         },
         editCard: (state, action) => {
             const cardToEdit = action.payload;
             const index = state.cart.findIndex((c: any) => c.id === cardToEdit.id);
             state.cart[index].quantity = state.cart[index].quantity + cardToEdit.quantity2;
+            localStorage.setItem('cart', JSON.stringify(state.cart));
+
         },
         deleteCard: (state, action) => {
             const index = state.cart.findIndex((c: any) => c.id === action.payload);
             state.cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(state.cart));
+
         },
         deleteArr: (state, action) => {
             state.cart = []
+            localStorage.setItem('cart', JSON.stringify(state.cart));
+        },
+        AddArr: (state, action) => {
+            state.cart = [...action.payload]
         },
     }
 });
-export const { addCard, editCard, deleteCard, deleteArr } = cardpants.actions;
+export const { addCard, editCard, deleteCard, deleteArr, AddArr } = cardpants.actions;
 
 export default cardpants.reducer

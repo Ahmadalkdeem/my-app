@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { addCard, deleteCard, editCard } from '../../features/cards/mycart';
+import { addCard } from '../../features/cards/mycart';
 import MyCard from '../../components/card/Card';
 import './style.css'
 import Swal from 'sweetalert2';
@@ -34,9 +34,9 @@ function Page() {
     const Navigate = useNavigate()
     let onDispatch = useAppDispatch()
 
-    const { loading3, users3, error3 } = useAppSelector((s) => s.cardshose);
-    const { loading2, users2, error2 } = useAppSelector((s) => s.cardPants);
-    const { loading, users, error } = useAppSelector((s) => s.cardshirts);
+    const { users3 } = useAppSelector((s) => s.cardshose);
+    const { users2 } = useAppSelector((s) => s.cardPants);
+    const { users } = useAppSelector((s) => s.cardshirts);
     const { cart } = useAppSelector((s) => s.mycart);
 
 
@@ -55,6 +55,7 @@ function Page() {
 
     };
     const item = () => {
+        if (fcategory !== 'shoes' && fcategory !== 'Shirts' && fcategory !== 'pants') { Navigate('/') }
         if (fcategory === 'shoes') {
             let x = users3.find((e: any) => e._id === id)
             if (x === undefined) {
@@ -116,12 +117,12 @@ function Page() {
         item()
         setState2(1)
         window.scrollTo(0, 0)
-        setarr([...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-6))
+        setarr([...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-8))
 
     }, [id, scategory, fcategory]);
     useEffect(() => {
-        if (arr[0] === undefined || arr.length < 6) {
-            setarr([...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-6))
+        if (arr[0] === undefined || arr.length < 8) {
+            setarr([...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-8))
         }
     }, [users, users2, users3]);
     return (

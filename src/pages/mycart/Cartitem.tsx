@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import css from './css.module.scss'
 import {
     MDBCard,

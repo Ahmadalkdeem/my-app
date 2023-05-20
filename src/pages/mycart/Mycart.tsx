@@ -60,21 +60,19 @@ const Mycart = () => {
 
             }
             else {
-                console.log('bb');
                 let cart2: any[] = []
                 cart.map((e: any) => {
-                    let item = {
-                        src: e.src[0], brand: e.brand, category: e.category, category2: e.category2, color: e.color, name: e.name, quantity: e.quantity, sizeselect: e.sizeselect
-                    }
+                    let item = { id: e._id, color: e.color, sizeselect: e.sizeselect, quantity: e.quantity }
                     cart2.push(item)
                 })
                 let Order = { fullname: fullname, Email: Email, Address: Address, Address2: Address2, City: City, Zip: Zip, pricecart: pricecart, cart: JSON.stringify(cart2) }
-                console.log(JSON.stringify(Order.cart));
 
 
                 axios.post(`http://localhost:3001/carts/neworder`, {
                     ...Order
                 }).then((response) => {
+                    console.log(response);
+
                     setfullname('')
                     setEmail('')
                     setAddress('')
@@ -95,6 +93,8 @@ const Mycart = () => {
             }
         }
     }
+
+
     return (
         <>
             <Helmet>
@@ -224,3 +224,7 @@ const Mycart = () => {
 }
 
 export default Mycart
+
+
+
+

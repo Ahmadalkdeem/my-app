@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
-import css from './css.module.scss'
+import { useState } from 'react'
 import axios from 'axios'
-import Cardlist from '../../components/cardlist2/Cardlist';
+import Cardlist from '../../components/cardlist/Cardlist';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { addItem2 } from '../../features/cards/cardPants';
 import Spiner from '../../components/Spiner/Spiner';
@@ -16,7 +15,7 @@ function Shose() {
     const getData = async () => {
         if (end === true) {
             setend(false)
-            axios.get(`http://localhost:3001/uplode/pantsproduct/20/${x}`, {
+            axios.get(`http://localhost:3001/uplode/pantsproduct/${x}`, {
             }).then((response) => {
                 setend(true)
                 if (response.data.length < 1) {
@@ -41,7 +40,7 @@ function Shose() {
         const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
 
         if (scrollPercentage > 50) {
-            // getData()
+            getData()
         }
     }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import Select from 'react-select'
 import { useState } from 'react'
 import axios from 'axios';
@@ -9,7 +9,7 @@ import { Cardtype } from '../../@types/Mytypes';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { optionstype } from '../../@types/Mytypes';
-import { SizeOptions, brands, SizeOptions2, categorys2, categorys3, categorys4, stylelableOption, categorys, colourOptions, } from '../../arrays/list'
+import { SizeOptions, brands, categorys2, categorys3, categorys4, stylelableOption, categorys, colourOptions, } from '../../arrays/list'
 function Editeproduct() {
     let Navigate = useNavigate()
     const getData = async (e: { category: string, id: string }) => {
@@ -113,7 +113,7 @@ function Editeproduct() {
         else { console.log(false); }
         if (titel.length < 100) console.log(true);
         else { console.log(false); }
-        if (description.length > 0 && titel.length > 0 && brand.length > 0 && Permissivecategory.length > 0 && secondarycategory.length > 0 && saleprice.length > 0 && regularprice.length > 0 && fSizeOptions2.length > 0) {
+        if (description.length > 0 && titel.length > 0 && brand.length > 0 && Permissivecategory.length > 0 && secondarycategory.length > 0 && saleprice > 0 && regularprice > 0 && fSizeOptions2.length > 0) {
             if (photo7.length > 0 || photos.length > 0) {
                 handleSaveStudentClicked2()
             } else {
@@ -122,6 +122,8 @@ function Editeproduct() {
             }
         }
         else {
+            console.log(description.length, titel.length, brand.length, Permissivecategory.length, secondarycategory.length, saleprice, regularprice, fSizeOptions2.length);
+
             console.log(false, false);
 
         }

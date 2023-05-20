@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { useState, useEffect } from 'react'
+import { useAppSelector } from '../../app/hooks'
 import { useParams } from 'react-router-dom'
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import css from './css.module.scss'
@@ -11,12 +11,9 @@ const Orderdetales = () => {
     let { id2 } = useParams()
     const { users4 } = useAppSelector((s) => s.orders)
     const [users, setusers] = useState<any>()
-    console.log(users);
+    const [index, setindex] = useState<number>()
 
-    let Dispatch = useAppDispatch()
-    // const { loading4, users4, error4 } = useAppSelector((s) => s.orders);
-    async function getorder() {
-
+    function getorder() {
 
         axios.get(`http://localhost:3001/carts/getoneorder/${id2}`, {
         }).then((response) => {
@@ -30,8 +27,10 @@ const Orderdetales = () => {
 
     }
     useEffect(() => {
-        let order = users4.find((e: any) => e._id === id2)
-        if (order === undefined) getorder();
+        window.scrollTo(0, 0)
+        let order: any = users4.find((e: any) => e._id === id2)
+        setindex(users4.findIndex((e: any) => e._id === id2) + 1)
+        if (order === undefined) { getorder() }
         else { setusers(order) }
     }, [id2]);
     return (
@@ -54,7 +53,7 @@ const Orderdetales = () => {
                             </MDBTableHead>
                             <MDBTableBody>
                                 <tr >
-                                    <th scope='row'>{1}</th>
+                                    <th scope='row'>{index}</th>
                                     <td> {users._id}</td>
                                     <td> {users.fullname}</td>
                                     <td> {users.Email}</td>
@@ -67,7 +66,7 @@ const Orderdetales = () => {
                         </MDBTable>
                     </div>
                     <div className={css.Divcards}>
-                        {users.arr.map((number: any, i: number) =>
+                        {users.products[0].map((number: any, i: number) =>
 
                             <Card key={i} style={{ width: '18rem' }}>
                                 <Card.Img className={css.Img} variant="top" src={number.src[0]} />
@@ -78,14 +77,12 @@ const Orderdetales = () => {
                                                 <tr>
                                                     <th scope='col'>brand:</th>
                                                     <th scope='col'>category:</th>
-                                                    <th scope='col'>צבע:</th>
                                                 </tr>
                                             </MDBTableHead>
                                             <MDBTableBody>
                                                 <tr >
                                                     <td> {number.name}</td>
                                                     <td> {number.category2}</td>
-                                                    <td> {number.color}</td>
                                                 </tr>
 
                                             </MDBTableBody>
@@ -102,9 +99,9 @@ const Orderdetales = () => {
                                             </MDBTableHead>
                                             <MDBTableBody>
                                                 <tr >
-                                                    <td> {number.quantity}</td>
-                                                    <td> {number.sizeselect}</td>
-                                                    <td> {number.color}</td>
+                                                    <td> {users.arr.find((e: any) => e.id === number._id).quantity}</td>
+                                                    <td> {users.arr.find((e: any) => e.id === number._id).sizeselect}</td>
+                                                    <td> {users.arr.find((e: any) => e.id === number._id).color}</td>
                                                 </tr>
 
                                             </MDBTableBody>

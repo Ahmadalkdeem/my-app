@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import css from './css.module.scss'
-import Card from 'react-bootstrap/Card';
 import { Helmet } from "react-helmet";
 
 function Aboutt() {
@@ -17,6 +16,7 @@ function Aboutt() {
                 <meta name="keywords" content="מכנסיים, נעליים, חולצות, אופנה, חנות, אינטרנט, קניות" />
             </Helmet>
             <div className={css.div}>
+                <h1 className={css.h1}>about as</h1>
                 <div className={css.mydiv}>
 
                     <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzV_u0UjwQds2dccWrlW8TOF3RoJDRZ0-3Gv-7FUxIA&s' alt="car" className={css.myimg} />
@@ -39,34 +39,7 @@ function Aboutt() {
                     </p>
                 </div>
 
-                {/* <div className='d-flex justify-content-around align-items-center flex-wrap w-100 g-3'>
 
-<Card
-style={{ width: '18rem' }} className={`d-flex flex-column justify-content-center  align-items-center border-0 ${css.card}`}>
-<Card.Img className={css.ImgCard} variant="top" src="https://cdn.pixabay.com/photo/2018/01/06/09/25/hijab-3064633__480.jpg" />
-<Card.Body className={css.bodycard}>
-<Card.Title className='text-center'>Card Title</Card.Title>
-<Card.Text className='text-center'>
-Some quick example text to build on the card title and make up the
-bulk of the card's content.
-</Card.Text>
-</Card.Body>
-</Card>
-<Card
-style={{ width: '18rem' }} className={`d-flex flex-column justify-content-center  align-items-center border-0 ${css.card}`}>
-<Card.Img className={css.ImgCard} variant="top" src="https://cdn.pixabay.com/photo/2018/01/06/09/25/hijab-3064633__480.jpg" />
-<Card.Body className={css.bodycard}>
-<Card.Title className='text-center'>Card Title</Card.Title>
-<Card.Text className='text-center'>
-Some quick example text to build on the card title and make up the
-bulk of the card's content.
-</Card.Text>
-                    </Card.Body>
-                </Card>
-
-                
-                
-            </div> */}
 
             </div>
         </>

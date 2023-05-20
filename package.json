@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/types": "^5.1.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
@@ -22,7 +21,7 @@
     "@types/slick-carousel": "^1.6.37",
     "@types/uuid": "^9.0.1",
     "add": "^2.0.6",
-    "axios": "^1.3.3",
+    "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "fslightbox-react": "^1.7.2",
     "hamburger-react": "^2.5.0",

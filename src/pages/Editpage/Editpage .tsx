@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import Select from 'react-select'
 import { useState } from 'react'
 import axios from 'axios';
@@ -9,7 +9,6 @@ import { optionstype } from '../../@types/Mytypes';
 import { SizeOptions, brands, SizeOptions2, categorys3, categorys4, stylelableOption, categorys2, categorys, colourOptions, } from '../../arrays/list'
 import { useAppSelector } from '../../app/hooks';
 import Swal from 'sweetalert2';
-import { productname, imgfile } from '../../validators/validators';
 function Editpage() {
     let Navigate = useNavigate()
     useEffect(() => {

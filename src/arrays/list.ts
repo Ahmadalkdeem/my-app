@@ -28,6 +28,22 @@ export const categorys: optionstype[] = [
     { value: 'shoes', label: 'shoes' },
 
 ];
+export const sort: optionstype[] = [
+    { value: '-1', label: 'המוצרים הכי נמכרים' },
+    { value: '1', label: 'המוצרים הפחות נמכרים' },
+];
+export const limet: optionstype[] = [
+    { value: '10', label: '10' },
+    { value: '20', label: '20' },
+    { value: '30', label: '30' },
+    { value: '40', label: '40' },
+    { value: '50', label: '50' },
+    { value: '60', label: '60' },
+    { value: '70', label: '70' },
+    { value: '80', label: '80' },
+    { value: '90', label: '90' },
+    { value: '100', label: '100' },
+];
 export const categorys2: optionstype[] = [
     { value: 'מכנסיים קצרים', label: 'מכנסיים קצרים' },
     { value: 'מכנסיים ארוכים', label: 'מכנסיים ארוכים' },
@@ -47,9 +63,9 @@ export const categorys4: optionstype[] = [
 
 ];
 export const colourOptions: optionstype[] = [
-    { value: 'Red', label: 'Red' },
+    { value: 'Red', label: 'אדום' },
     { value: 'Blue', label: 'Blue' },
-    { value: 'Green', label: 'Green' },
+    { value: 'Green', label: 'ירוק' },
     { value: 'Yellow', label: 'Yellow' },
     { value: 'Orange', label: 'Orange' },
     { value: 'Purple', label: 'Purple' },

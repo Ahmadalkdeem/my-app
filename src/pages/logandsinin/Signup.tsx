@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import css from './css.module.scss'
 import { valMail, valpassword, valusername } from '../../validators/validators';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
 import { updatedetalise } from '../../features/user/user';
 import { Helmet } from "react-helmet";
 
@@ -30,17 +30,17 @@ const Signup = () => {
 
 
         if (!valMail.test(email) && email !== '') { seterremail("המייל לא תקין") } else if (valMail.test(email)) { seterremail('') }
-        if (email === '') { seterremail('תקליד   מייל') }
+        if (email === '') { seterremail('תקליד מייל') }
 
         if (valpassword.test(password) && valusername.test(username) && valMail.test(email)) {
-            console.log('aa');
             axios.post('http://localhost:3001/api/auth/signup', { username: username, email: email, password: password }).then((response) => {
                 console.log(response.data);
                 Dispatch(updatedetalise(response.data.id))
                 Navigate('/')
-            }).catch(e => {
-                console.log(e);
-
+            }).catch((e) => {
+                if (e.response.data.message === 'Email already exists') {
+                    seterrpassword('המייל רשום')
+                }
             })
         } else {
             console.log('bb');

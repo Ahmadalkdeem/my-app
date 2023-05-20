@@ -30,18 +30,21 @@ import Notfoud from './components/404/Notfoud';
 import { Data } from './pages/datadetsles/Data';
 import Users from './pages/users/Users';
 import ForgotPassword from './pages/logandsinin/ForgotPassword';
+import { AddArr } from './features/cards/mycart';
+import Restartpassword from './pages/logandsinin/Restartpassword';
 function App() {
   let { email, roles, username, accessToken } = useAppSelector(e => e.user)
-  console.log(email, roles, username, accessToken);
-
-
   let Dispatch = useAppDispatch()
-  useEffect(() => {
-    const myData: any = localStorage.getItem("userdetalis");
-    console.log(myData);
 
-    if (myData === null || myData === undefined) { }
-    else {
+  async function start() {
+    const myData: any = localStorage.getItem("userdetalis");
+    const cart: any = localStorage.getItem("cart");
+    Dispatch(AddArr(JSON.parse(cart)))
+    Dispatch(fetchUsers())
+    Dispatch(fetchUsers2())
+    Dispatch(fetchUsers3())
+
+    if (myData !== null && myData !== undefined) {
       axios.post(`http://localhost:3001/api/auth/valtoken`, {
         token: myData
       }).then((response) => {
@@ -53,47 +56,48 @@ function App() {
 
       })
     }
-  }, []);
-
-
+  }
   useEffect(() => {
-    Dispatch(fetchUsers())
-    Dispatch(fetchUsers2())
-    Dispatch(fetchUsers3())
-
+    start()
   }, []);
-
 
   return (
     <>
       <MyNavbar2 />
       <MyNavbar />
+      <button onClick={() => {
+        axios.get(`http://localhost:3001/email/ahmad`, {
+        }).then((response) => {
+          console.log(response.data);
+        }).catch(e => {
+          console.log(e);
 
+        })
+      }}>ahmad</button>
       <Routes >
         <Route path='/' element={<Cardlist />} />
         <Route path='/home' element={<Cardlist />} />
         <Route path='/connection' element={<Bootstrapform />} >
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<Signup />} />
-          {/* <Route path='ForgotPassword' element={<ForgotPassword />} /> */}
+          <Route path='ForgotPassword' element={<ForgotPassword />} />
+          <Route path='Restartpassword' element={<Restartpassword />} />
         </Route>
         <Route path='/about' element={<About />} />
-        <Route path='/Mycard' element={<Mycart />} />
         <Route path='/shoes' element={<Shose />} />
+        <Route path='/Mycard' element={<Mycart />} />
         <Route path='/Shirts' element={<Shirt />} />
         <Route path='/pants' element={<Pants />} />
         <Route path='/:fcategory/:scategory/:id' element={<Page />} />
         {roles[0] === 'admin' && <>
           <Route path='/addproduct' element={<Editpage />} />
           <Route path='/data' element={<Data />} />
-          <Route path='/orders' element={<Order />}>
-            <Route path='detales/:id2' element={<Orderdetales />} />
-          </Route>
+          <Route path='/orders' element={<Order />} />
+          <Route path='/orders/detales/:id2' element={<Orderdetales />} />
           <Route path='/Editeproduct/:category/:id' element={<Editeproduct />} />
           <Route path='/users' element={<Users />} />
         </>
         }
-
         <Route path='*' element={<Notfoud />} />
       </Routes>
       <Buttom />

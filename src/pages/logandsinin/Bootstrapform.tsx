@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import css from './css.module.scss'
 import { Outlet } from 'react-router-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 function Bootstrapform() {
     let Navigate = useNavigate()
     const [form, setform] = useState('כניסה');
     useEffect(() => {
         window.scrollTo(0, 0)
-        Navigate('/connection/login')
+        // Navigate('/connection/login')
     }, [])
 
     return (

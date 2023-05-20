@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
     users: []
@@ -10,7 +10,7 @@ const users = createSlice({
     name: "users",
     initialState,
     reducers: {
-        addItem: (state, action) => {
+        addItems: (state, action) => {
             let arr: any = []
             action.payload.forEach((element: any) => {
                 const index = state.users.findIndex((c: any) => c._id === element._id);
@@ -19,11 +19,24 @@ const users = createSlice({
                 }
             });
             state.users = [...state.users, ...arr];
+        }, addItem: (state, action) => {
+
+            const index = state.users.findIndex((c: any) => c._id === action.payload._id);
+            if (index < 0) {
+                state.users = [action.payload, ...state.users];
+            } else {
+                let arr = state.users
+                arr.splice(index, 1)
+                state.users = [action.payload, ...arr];
+
+            }
         }, delteItem: (state, action) => {
             const index = state.users.findIndex((c: any) => c._id === action.payload);
-
-            //delete the card at index:
-            state.users3.splice(index, 1);
+            state.users.splice(index, 1);
+        }
+        , updateItem: (state, action) => {
+            const index = state.users.findIndex((c: any) => c._id === action.payload._id);
+            state.users[index].roles = action.payload.roles
         }
     },
     extraReducers: (builder) => {
@@ -31,7 +44,7 @@ const users = createSlice({
     },
 });
 // also exported fetchUsers at the top
-export const { addItem, delteItem } = users.actions;
+export const { addItem, addItems, delteItem, updateItem } = users.actions;
 
 //export the reducer
 export default users.reducer

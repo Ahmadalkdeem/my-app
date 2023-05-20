@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { updatedetalise } from '../../features/user/user';
-const ForgotPassword = () => {
+const Restartpassword = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
@@ -14,15 +14,11 @@ const ForgotPassword = () => {
     let Dispatch = useAppDispatch()
     const [username, setusername] = useState('');
     const [errusername, seterrusername] = useState('');
-    const [password, setpassword] = useState('');
-    const [errpassword, seterrpassword] = useState('');
-    const [password2, setpassword2] = useState('');
-    const [errpassword2, seterrpassword2] = useState('');
 
     const login = () => {
-        if (valMail.test(username) && valpassword.test(password) && valpassword.test(password2)) {
-            axios.post('http://localhost:3001/api/auth/ForgotPassword', { email: username, password: password, password2: password2 }).then((response) => {
-                Dispatch(updatedetalise(response.data))
+        if (valMail.test(username)) {
+            axios.post('http://localhost:3001/api/auth/Restartpassword', { email: username }).then((response) => {
+                // Dispatch(updatedetalise(response.data))
             }).catch(e => {
                 console.log(e);
             })
@@ -33,18 +29,7 @@ const ForgotPassword = () => {
         } else {
             seterrusername('')
         }
-        if (!valpassword.test(password)) {
-            seterrpassword('הסיסמה צרכיה להיוות 8-14 שמיכלה מספרים ואותיות באגלית')
 
-        } else {
-            seterrpassword('')
-        }
-        if (!valpassword.test(password2)) {
-            seterrpassword2('הסיסמה צרכיה להיוות 8-14 שמיכלה מספרים ואותיות באגלית')
-
-        } else {
-            seterrpassword2('')
-        }
     }
     return (
         <>
@@ -60,20 +45,11 @@ const ForgotPassword = () => {
                     setusername(e.target.value)
                 }} className={css.input} type="text" id='email' />
                 <p className={css.P}>{errusername === '' ? '' : errusername}</p>
-                <label className={css.lable} htmlFor="password">הסיסמה הישנה:</label>
-                <input value={password} onChange={(e) => {
-                    setpassword(e.target.value)
-                }} className={css.input} type="text" id='password' />
-                <p className={css.P}>{errpassword === '' ? '' : errpassword}</p>
-                <label className={css.lable} htmlFor="password2">הסיסמה החדשה:</label>
-                <input value={password2} onChange={(e) => {
-                    setpassword2(e.target.value)
-                }} className={css.input} type="text" id='password2' />
-                <p className={css.P}>{errpassword2 === '' ? '' : errpassword2}</p>
+
 
                 <input className={css.btn} type="button" value="כניסה" onClick={login} />
             </form></>
     )
 }
 
-export default ForgotPassword
+export default Restartpassword

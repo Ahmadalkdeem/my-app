@@ -3,12 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState: any = {
     accessToken: '',
     email: '',
-    roles: [],
+    roles: ['user'],
     username: '',
 };
 
 
-// fetch user from api
 const userdetalis = createSlice({
     name: "userdetalis",
     initialState,
@@ -19,10 +18,6 @@ const userdetalis = createSlice({
             state.email = action.payload.email
             state.username = action.payload.username
             state.roles = action.payload.roles
-        }, vartoken: (state, action) => {
-            state.username = action.payload.username
-            state.roles = action.payload.roles
-
         }
     }
 });

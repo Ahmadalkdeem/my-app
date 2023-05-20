@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react'
 import MyCard from '../../components/card/Card'
 import css from './css.module.scss'
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Card, Container, Row, Col } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { useNavigate } from "react-router-dom";
+import { Container, Row, Col } from 'react-bootstrap';
+import { useAppSelector } from '../../app/hooks'
 import Myslider from '../../components/slider/Slider';
 import MYCarousel from '../../components/corsla/Carousel';
 import img from './Red Modern New Arrival Shoes Instagram Post.png'
 import img2 from './White Modern T-shirts Giveaway (A4 Document).png'
 import img3 from './Blue Minimalist Fashion Denim Facebook Post.png'
 import { Helmet } from "react-helmet";
-import { FcShipped } from "react-icons/fc";
-import { BiSupport } from "react-icons/bi";
+
 
 function Cardlist() {
     useEffect(() => {
